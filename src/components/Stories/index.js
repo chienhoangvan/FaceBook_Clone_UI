@@ -16,14 +16,14 @@ class index extends Component {
     }
     render() {
         const { stories, user , navigation} = this.props
-        return (
-            <View style={styles.container}>
-                <ScrollView showsHorizontalScrollIndicator={false} style={styles.stories} horizontal={true}>
-                    <StoryAdder user={user} ></StoryAdder>
-                    {stories.map((story, index) => (<Story position={index}  key={index} story={story} />))}
-                </ScrollView>
-            </View >
-        )
+//        return (
+//            <View style={styles.container}>
+//                <ScrollView showsHorizontalScrollIndicator={false} style={styles.stories} horizontal={true}>
+//                    <StoryAdder user={user} ></StoryAdder>
+//                    {stories.map((story, index) => (<Story position={index}  key={index} story={story} />))}
+//                </ScrollView>
+//            </View >
+//        )
     }
 }
 const mapDispatchToProp = (dispatch, props) => {

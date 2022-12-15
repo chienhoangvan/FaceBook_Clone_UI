@@ -47,29 +47,29 @@ class index extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.postOptionsWrapper}>
-                    {!isWriteToAnyOne && !isWriteToPage &&
-                        <TouchableOpacity onPress={this.onLiveStreamPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
-                            <View style={styles.postOptionItem}>
-                                <FontAweSome5 style={styles.postOptionIcon} name="video" color="red" size={16} />
-                                <Text>Live Stream</Text>
-                            </View>
-                        </TouchableOpacity>
-                    }
-                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressPostToAnyOneHandler.bind(this) : this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
-                        <View style={{ ...styles.postOptionItem, ...styles.postOptionItemMiddle }}>
-                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'edit' : 'image'} color="green" size={16} />
-                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Write a post' : 'Photo'}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressSharePhotoToAnyOne.bind(this) : this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
-                        <View style={styles.postOptionItem}>
-                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'image' : "map-marker-alt"} color="red" size={16} />
-                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Share Photos' : 'Check in'}</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
             </View>
+//                <View style={styles.postOptionsWrapper}>
+//                    {!isWriteToAnyOne && !isWriteToPage &&
+//                        <TouchableOpacity onPress={this.onLiveStreamPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+//                            <View style={styles.postOptionItem}>
+//                                <FontAweSome5 style={styles.postOptionIcon} name="video" color="red" size={16} />
+//                                <Text>Live Stream</Text>
+//                            </View>
+//                        </TouchableOpacity>
+//                    }
+//                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressPostToAnyOneHandler.bind(this) : this.onPhotoUploaderPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+//                        <View style={{ ...styles.postOptionItem, ...styles.postOptionItemMiddle }}>
+//                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'edit' : 'image'} color="green" size={16} />
+//                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Write a post' : 'Photo'}</Text>
+//                        </View>
+//                    </TouchableOpacity>
+//                    <TouchableOpacity onPress={isWriteToAnyOne || isWriteToPage ? this.onPressSharePhotoToAnyOne.bind(this) : this.onCheckInPressHandler} activeOpacity={0.5} style={styles.postOptionItemWrapper}>
+//                        <View style={styles.postOptionItem}>
+//                            <FontAweSome5 style={styles.postOptionIcon} name={isWriteToAnyOne || isWriteToPage ? 'image' : "map-marker-alt"} color="red" size={16} />
+//                            <Text>{isWriteToAnyOne || isWriteToPage ? 'Share Photos' : 'Check in'}</Text>
+//                        </View>
+//                    </TouchableOpacity>
+//                </View>
         )
     }
 }

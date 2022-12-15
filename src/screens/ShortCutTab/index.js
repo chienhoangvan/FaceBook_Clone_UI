@@ -77,151 +77,134 @@ class index extends Component {
               <Text style={{ color: "#333" }}>View your profile page</Text>
             </View>
           </ExTouchableOpacity>
-          <ExTouchableOpacity
-            onPress={this.onPressWatchVideoHandler}
-            style={styles.btnOption}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/video.png")}
-            />
-            <View>
-              <Text style={styles.name}>Video on facebook</Text>
-              <Text style={{ color: "#333" }}>X+ new videos</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/bookmark.png")}
-            />
-            <View>
-              <Text style={styles.name}>Saved</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/live-news.png")}
-            />
-            <View>
-              <Text style={styles.name}>Live video</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity
-            onPress={this.onPressFullFriendsHandler.bind(this)}
-            style={styles.btnOption}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/friendship.png")}
-            />
-            <View>
-              <Text style={styles.name}>Friends</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity
-            onPress={this.onPressGroupsHandler}
-            style={styles.btnOption}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/group.png")}
-            />
-            <View>
-              <Text style={styles.name}>Groups</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity
-            onPress={this.onPressMarketplaceHandler}
-            style={styles.btnOption}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/marketplace.png")}
-            />
-            <View>
-              <Text style={styles.name}>Marketplace</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/calendar.png")}
-            />
-            <View>
-              <Text style={styles.name}>Events</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/history.png")}
-            />
-            <View>
-              <Text style={styles.name}>Past</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/article.png")}
-            />
-            <View>
-              <Text style={styles.name}>Pages</Text>
-              <Text style={{ color: "#333" }}>X+ new pages</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity
-            onPress={this.onpressFriendAroundHandler}
-            style={styles.btnOption}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/planet.png")}
-            />
-            <View>
-              <Text style={styles.name}>Friends around here</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/controller.png")}
-            />
-            <View>
-              <Text style={styles.name}>Play game</Text>
-            </View>
-          </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/job.png")}
-            />
-            <View>
-              <Text style={styles.name}>Jobs</Text>
-            </View>
-          </ExTouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnOption}
-            onPress={this.onPressToggleShowHandler.bind(this)}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/more-options.png")}
-            />
-            <View style={styles.centerBtnShowMore}>
-              <Text style={styles.name}>
-                {isShowMore ? "Hide" : "Show More"}
-              </Text>
-            </View>
-            <FontAwesome5Icon
-              style={{ alignContent: "center" }}
-              name={isShowMore ? "chevron-up" : "chevron-down"}
-              size={20}
-              color="#333"
-            />
-          </TouchableOpacity>
+          
+//          <ExTouchableOpacity
+//            onPress={this.onPressWatchVideoHandler}
+//            style={styles.btnOption}
+//          >
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/video.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Video on facebook</Text>
+//              <Text style={{ color: "#333" }}>X+ new videos</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/bookmark.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Saved</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/live-news.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Live video</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity
+//            onPress={this.onPressFullFriendsHandler.bind(this)}
+//            style={styles.btnOption}
+//          >
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/friendship.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Friends</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity
+//            onPress={this.onPressGroupsHandler}
+//            style={styles.btnOption}
+//          >
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/group.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Groups</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity
+//            onPress={this.onPressMarketplaceHandler}
+//            style={styles.btnOption}
+//          >
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/marketplace.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Marketplace</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/calendar.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Events</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/history.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Past</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/article.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Pages</Text>
+//              <Text style={{ color: "#333" }}>X+ new pages</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity
+//            onPress={this.onpressFriendAroundHandler}
+//            style={styles.btnOption}
+//          >
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/planet.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Friends around here</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/controller.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Play game</Text>
+//            </View>
+//          </ExTouchableOpacity>
+//          <ExTouchableOpacity style={styles.btnOption}>
+//            <Image
+//              style={styles.icon}
+//              source={require("../../../assets/icons/job.png")}
+//            />
+//            <View>
+//              <Text style={styles.name}>Jobs</Text>
+//            </View>
+//          </ExTouchableOpacity>
+
+
           <Animated.View
             style={{
               ...styles.moreOptionsWrapper,
