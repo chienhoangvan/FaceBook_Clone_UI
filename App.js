@@ -72,12 +72,6 @@ const RootStack = createNativeStackNavigator();
 axios.defaults.baseURL = BASE_URL;
 
 const HomeTab = () => {
-  // CameraRoll.getPhotos({
-  // 	first: 20,
-  // 	assetType: 'Photos',
-  // }).then(result => {
-  // 	console.log(result)
-  // })
   return (
     <Stack.Navigator
       screenOptions={{
@@ -104,10 +98,12 @@ const GroupTab = () => {
     </Stack.Navigator>
   );
 };
+
 const WatchScreenWithIsFocused = (props) => {
   const isFocused = useIsFocused();
   return <WatchScreen {...props} isFocused={isFocused}></WatchScreen>;
 };
+
 const WatchTab = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -115,6 +111,7 @@ const WatchTab = () => {
     </Stack.Navigator>
   );
 };
+
 const ProfileTab = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -122,6 +119,7 @@ const ProfileTab = () => {
     </Stack.Navigator>
   );
 };
+
 const NotificationTab = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -129,6 +127,7 @@ const NotificationTab = () => {
     </Stack.Navigator>
   );
 };
+
 const ShortCutTab = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -136,6 +135,7 @@ const ShortCutTab = () => {
     </Stack.Navigator>
   );
 };
+
 const MainTab = () => {
   const navigationOptions = {
     style: {
@@ -156,7 +156,7 @@ const MainTab = () => {
             ></Icon>
           ),
         }}
-        name="HomeTab"
+        name=" "
         component={HomeTab}
       />
       <Tab.Screen
@@ -208,7 +208,7 @@ const MainTab = () => {
             ></Icon>
           ),
         }}
-        name="Notification"
+        name="Notifi"
         component={NotificationTab}
       />
       <Tab.Screen
@@ -221,12 +221,13 @@ const MainTab = () => {
             ></Icon>
           ),
         }}
-        name="ShortCut"
+        name="Short"
         component={ShortCutTab}
       />
     </Tab.Navigator>
   );
 };
+
 function App() {
   const TransitionPreset =
     Platform.OS === "ios" ? TransitionPresets.ModalSlideFromBottomIOS : {};
@@ -245,47 +246,6 @@ function App() {
           <RootStack.Screen component={MainTab} name="MainTab" />
           <RootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
           <RootStack.Screen name="PostDetail" component={PostDetail} />
-
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="Marketplace"
-            component={Marketplace}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="MarketplaceSearch"
-            component={MarketplaceSearch}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="MarketplaceProductDetail"
-            component={MarketplaceProductDetail}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="MarketplaceCategory"
-            component={MarketplaceCategory}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="MarketplaceArea"
-            component={MarketplaceArea}
-          />
 
           <RootStack.Screen
             options={{ gestureEnabled: false }}
