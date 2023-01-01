@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
     },
     navigationBar: {
         flexDirection: 'row',
-        paddingTop: STATUSBAR_HEIGHT,
-        height: 94,
+        paddingTop: 5,
+        height: 65,
         alignItems: 'center',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1

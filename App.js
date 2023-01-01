@@ -100,6 +100,15 @@ const GroupTab = () => {
   );
 };
 
+const FriendTab = () => {
+  return (
+    <Stack.Navigator screenOptions = {{ headerShown: true }}>
+      <Stack.Screen name="Friend Requests" component={FriendRequests} />
+
+    </Stack.Navigator>
+  )
+}
+
 const WatchScreenWithIsFocused = (props) => {
   const isFocused = useIsFocused();
   return <WatchScreen {...props} isFocused={isFocused}></WatchScreen>;
@@ -169,8 +178,8 @@ const MainTab = () => {
             ></Icon>
           ),
         }}
-        name="Group"
-        component={GroupTab}
+        name="Friends"
+        component={FriendTab}
       />
       <Tab.Screen
         options={{
