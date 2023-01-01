@@ -64,6 +64,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { navigationRef } from "./src/rootNavigation";
 import store from "./src/store";
+import Login from "./src/screens/LoginTab/Login";
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -142,7 +143,6 @@ const MainTab = () => {
       paddingTop: STATUSBAR_HEIGHT,
     },
     showIcon: true,
-    showLabel: false,
   };
   return (
     <Tab.Navigator screenOptions={navigationOptions}>
@@ -156,14 +156,14 @@ const MainTab = () => {
             ></Icon>
           ),
         }}
-        name=" "
+        name="Home"
         component={HomeTab}
       />
       <Tab.Screen
         options={{
           tabBarIcon: ({ tintColor, focused }) => (
             <Icon
-              name="users"
+              name="user-friends"
               size={20}
               color={focused ? "#318bfb" : "#ddd"}
             ></Icon>
@@ -337,6 +337,14 @@ function App() {
             }}
             name="FullFriends"
             component={FullFriends}
+          />
+          <RootStack.Screen
+             options={{
+               gestureEnabled: false,
+               ...TransitionPresets.SlideFromRightIOS,
+             }}
+             name="Login"
+             component={Login}
           />
           <RootStack.Screen
             options={{ cardStyle: { backgroundColor: "transparent" } }}

@@ -43,6 +43,9 @@ class index extends Component {
   onPressMarketplaceHandler() {
     navigation.navigate("Marketplace");
   }
+  onPressLogoutHandler() {
+    navigation.navigate("Login");
+  }
   onPressToggleShowHandler() {
     if (this.state.isShowMore) {
       Animated.timing(this._moreOptionsHeight, {
@@ -202,26 +205,7 @@ class index extends Component {
               <Text style={styles.name}>Jobs</Text>
             </View>
           </ExTouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnOption}
-            onPress={this.onPressToggleShowHandler.bind(this)}
-          >
-            <Image
-              style={styles.icon}
-              source={require("../../../assets/icons/more-options.png")}
-            />
-            <View style={styles.centerBtnShowMore}>
-              <Text style={styles.name}>
-                {isShowMore ? "Hide" : "Show More"}
-              </Text>
-            </View>
-            <FontAwesome5Icon
-              style={{ alignContent: "center" }}
-              name={isShowMore ? "chevron-up" : "chevron-down"}
-              size={20}
-              color="#333"
-            />
-          </TouchableOpacity>
+
           <Animated.View
             style={{
               ...styles.moreOptionsWrapper,
@@ -330,7 +314,10 @@ class index extends Component {
               <Text style={styles.name}>Setting & Privacy</Text>
             </View>
           </ExTouchableOpacity>
-          <ExTouchableOpacity style={styles.btnOption}>
+          <ExTouchableOpacity
+            style={styles.btnOption}
+            onPress={this.onPressLogoutHandler}
+            >
             <Image
               style={styles.icon}
               source={require("../../../assets/icons/logout.png")}
