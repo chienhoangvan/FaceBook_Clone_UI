@@ -102,9 +102,8 @@ const GroupTab = () => {
 
 const FriendTab = () => {
   return (
-    <Stack.Navigator screenOptions = {{ headerShown: true }}>
+    <Stack.Navigator screenOptions = {{ headerShown: false }}>
       <Stack.Screen name="Friend Requests" component={FriendRequests} />
-
     </Stack.Navigator>
   )
 }
