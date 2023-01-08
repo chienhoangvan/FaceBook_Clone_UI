@@ -34,7 +34,6 @@ class Home extends Component {
       <View style={{ flex: 1 }}>
         <ScrollView bounces={false} style={styles.listContainter}>
           <PostTool></PostTool>
-          <Stories></Stories>
           {posts.map((item, index) => (
             <View key={index}>
               {index === 1 && <RecommendFriends></RecommendFriends>}

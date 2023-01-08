@@ -358,92 +358,13 @@ class FullPostTool extends Component {
                   style={{
                     ...styles.bgImage,
                     ...styles.toggleBgColors,
-                    zIndex: toggleZindexValue,
-                    transform: [{ rotate: degTransformToggle }],
-                  }}
-                  source={require("../../../assets/icons/left-arrow.png")}
-                />
-                <Animated.Image
-                  style={{
-                    ...styles.bgImage,
-                    ...styles.toggleBgColors,
                     zIndex: 1,
                     transform: [{ scale: scaleTransformToggle }],
                   }}
                   source={require("../../../assets/icons/letter-a.png")}
                 />
               </TouchableWithoutFeedback>
-              <Animated.View
-                style={{ flexDirection: "row", width: bgColorListWidth }}
-              >
-                <ScrollView
-                  horizontal={true}
-                  style={{ ...styles.bgColorsScrollView }}
-                  showsHorizontalScrollIndicator={false}
-                >
-                  {bgColors.map((bgColor, index) => (
-                    <View key={index}>
-                      {bgColor.isPureColor && (
-                        <TouchableWithoutFeedback
-                          style={styles.bgColor}
-                          onPress={this.onSelectBgColorHandler.bind(
-                            this,
-                            bgColor.id
-                          )}
-                        >
-                          <View
-                            style={{
-                              backgroundColor: bgColor.color,
-                              ...styles.bgImage,
-                              borderColor:
-                                this.state.selectedBgColorId === bgColor.id
-                                  ? "#318bfb"
-                                  : "#333",
-                              borderWidth:
-                                this.state.selectedBgColorId === bgColor.id
-                                  ? 3
-                                  : 1,
-                            }}
-                          ></View>
-                        </TouchableWithoutFeedback>
-                      )}
-                      {!bgColor.isPureColor && (
-                        <TouchableWithoutFeedback
-                          style={styles.bgColor}
-                          onPress={this.onSelectBgColorHandler.bind(
-                            this,
-                            bgColor.id
-                          )}
-                        >
-                          <Image
-                            style={{
-                              ...styles.bgImage,
-                              borderColor:
-                                this.state.selectedBgColorId === bgColor.id
-                                  ? "#318bfb"
-                                  : "#333",
-                              borderWidth:
-                                this.state.selectedBgColorId === bgColor.id
-                                  ? 3
-                                  : 1,
-                            }}
-                            source={{ uri: bgColor.bgImage_url }}
-                          ></Image>
-                        </TouchableWithoutFeedback>
-                      )}
-                    </View>
-                  ))}
-                </ScrollView>
-                <TouchableWithoutFeedback
-                  style={styles.btnBgColor}
-                  onPress={() => console.log("okeee")}
-                >
-                  <Image
-                    style={{ ...styles.bgImage, ...styles.moreBgColors }}
-                    source={require("../../../assets/icons/more.png")}
-                  ></Image>
-                </TouchableWithoutFeedback>
-              </Animated.View>
+              
             </View>
             <PanGestureHandler
               onGestureEvent={this.onGestureEventHandler.bind(this)}

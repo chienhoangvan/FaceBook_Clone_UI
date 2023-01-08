@@ -53,7 +53,6 @@ import Search from "./src/screens/Search/";
 import SeenVideos from "./src/screens/WatchTab/SeenVideos";
 import SharePost from "./src/screens/SharePost";
 import ShortCutScreen from "./src/screens/ShortCutTab";
-import StoryDetailScreen from "./src/screens/StoryDetail";
 import WatchDetail from "./src/screens/WatchTab/WatchDetail";
 import WatchDetailList from "./src/screens/WatchTab/WatchDetailList";
 import WatchOptions from "./src/screens/WatchTab/WatchOptions";
@@ -248,12 +247,17 @@ function App() {
   };
   return (
     <Provider store={store}>
-      {/* <GestureHandlerRootView> */}
+
       <NavigationContainer ref={navigationRef}>
         <RootStack.Navigator screenOptions={navigationOptions}>
-          <RootStack.Screen component={MainTab} name="MainTab" />
-          <RootStack.Screen name="StoryDetail" component={StoryDetailScreen} />
-          <RootStack.Screen name="PostDetail" component={PostDetail} />
+
+          <RootStack.Screen
+            component={MainTab}
+            name="MainTab" />
+
+          <RootStack.Screen
+            name="PostDetail"
+            component={PostDetail} />
 
           <RootStack.Screen
             options={{ gestureEnabled: false }}

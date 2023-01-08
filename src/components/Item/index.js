@@ -84,52 +84,32 @@ class Item extends Component {
                     </View>
                 </TouchableOpacity>
                 <View horizontal={true} style={styles.reactionContainer}>
-                    <TouchableOpacity><Icon
+                    <TouchableOpacity>
+                      <Icon
                         name="thumbs-up"
                         color="#318bfb"
                         backgroundColor="#fff"
                         style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
-                    <TouchableOpacity><Icon
-                        name="heart"
-                        color="#e8304a"
-                        backgroundColor="white"
-                        style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
-                    <TouchableOpacity><Icon
-                        name="grin-squint"
-                        color="#f7ca51"
-                        backgroundColor="white"
-                        style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
-                    <TouchableOpacity><Icon
-                        name="surprise"
-                        color="#f7ca51"
-                        backgroundColor="white"
-                        style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
-                    <TouchableOpacity><Icon
-                        name="sad-tear"
-                        color="#f7ca51"
-                        backgroundColor="white"
-                        style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
-                    <TouchableOpacity><Icon
-                        lineBreakMode={false}
-                        name="angry"
-                        color="#dc4311"
-                        backgroundColor="white"
-                        style={styles.reactionIcon}
-                    ></Icon></TouchableOpacity>
+                      >
+                        <Text style={{ fontSize: 12 }}> {item.comments.length}</Text>
+                      </Icon>
+                    </TouchableOpacity>
+
                     <TouchableOpacity onPress={this.onPressHandle.bind(this)}><Icon
                         lineBreakMode={false}
                         name="comment-alt"
                         color="gray"
                         backgroundColor="white"
-                        style={{ ...styles.reactionIcon, fontSize: 14 }}
-                    ><Text style={{ fontSize: 12 }}> {item.comments.length} comments</Text></Icon></TouchableOpacity>
-                    <TouchableOpacity onPress={this.onPressShareHandler.bind(this)} style={styles.shareIcon}><Icon name="share-alt"
-                        color="gray" ><Text style={{ fontSize: 12, textAlignVertical: 'center' }}> Share</Text></Icon></TouchableOpacity>
+                        style={{ ...styles.commentIcon }}
+                    ><Text style={{ fontSize: 12 }}> {item.comments.length} comments</Text></Icon>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={this.onPressShareHandler.bind(this)} style={styles.shareIcon}>
+                      <Icon name="share-alt"
+                        color="gray" >
+                        <Text style={{ fontSize: 12, textAlignVertical: 'auto' }}> Share</Text>
+                      </Icon>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.commentContainer}>
                     <Image source={{ uri: user.avatar_url }} style={styles.commentAvatar}></Image>
@@ -240,5 +220,11 @@ const styles = StyleSheet.create({
         height: 30,
         textAlign: 'center',
         lineHeight: 30
-    }
+    },
+    commentIcon: {
+        position: 'relative',
+        fontSize: 16,
+        padding: 10,
+        right: -80
+    },
 })
