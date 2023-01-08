@@ -26,17 +26,22 @@ class FriendRequests extends Component {
     onPressGoBackHandler() {
         navigation.goBack()
     }
+    onPressAllFriendsHandler() {
+        const { friends } = this.props
+        navigation.push('FullFriends', {
+            friends
+        })
+    }
+    onPressFindFriendsHandler() {
+        navigation.push('FindFriends')
+    }
     render() {
         let { friendRequests } = this.props
         if (friendRequests.length === 0) return <View></View>
         return (
             <View style={styles.container}>
                 <View style={styles.navigationBar}>
-                    <ExTouchableOpacity onPress={this.onPressGoBackHandler} style={styles.btnBack}>
-                        <FontAwesome5Icon name="arrow-left" size={20} />
-                    </ExTouchableOpacity>
                     <ExTouchableOpacity
-
                         activeOpacity={0.8}
                         style={styles.searchInput}>
                         <FontAwesome5Icon name="search" size={16} color="gray" />
@@ -47,7 +52,14 @@ class FriendRequests extends Component {
                     style={styles.scrollContainer}
                     bounces={false}
                     showsVerticalScrollIndicator={false}>
-
+                    <View style={styles.btnNavigationsWrapper}>
+                        <TouchableOpacity onPress={this.onPressFindFriendsHandler.bind(this)} style={{ ...styles.btnNavigation, marginRight: 10 }}>
+                            <Text style={{ fontSize: 16, fontWeight: '500' }}>Suggest</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.onPressAllFriendsHandler.bind(this)} style={styles.btnNavigation}>
+                            <Text style={{ fontSize: 16, fontWeight: '500' }}>All Friends</Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.friendRequestsWrapper}>
                         <Text style={styles.friendRequestsTitle}>Friend Requests</Text>
                         <View style={styles.friendRequests}>
@@ -78,6 +90,7 @@ class FriendRequests extends Component {
 const maptStateToProps = state => {
     return {
         friendRequests: state.friends.friendRequests,
+        friends: state.user.friends,
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -107,7 +120,8 @@ const styles = StyleSheet.create({
     searchInput: {
         flexDirection: 'row',
         backgroundColor: '#ddd',
-        width: SCREEN_WIDTH - 40 - 15,
+        width: SCREEN_WIDTH - 15,
+        marginLeft: 10,
         height: 36,
         borderRadius: 40,
         alignItems: 'center',
