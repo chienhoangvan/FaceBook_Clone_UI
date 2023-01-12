@@ -23,18 +23,9 @@ import FriendOptions from "./src/screens/ProfileTab/FriendOptions";
 import FriendRequests from "./src/screens/ProfileTab/FriendRequests";
 import FullFriends from "./src/screens/ProfileTab/FullFriends";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import GroupCategories from "./src/screens/GroupTab/GroupCategories";
-import GroupCategory from "./src/screens/GroupTab/GroupCategory";
-import GroupProfile from "./src/screens/GroupTab/Group";
-import GroupScreen from "./src/screens/GroupTab";
-import GroupSearch from "./src/screens/Search/GroupSearch";
+
 import Home from "./src/screens/Home";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import Marketplace from "./src/screens/ShortCutTab/Marketplace";
-import MarketplaceArea from "./src/screens/ShortCutTab/MarketplaceArea";
-import MarketplaceCategory from "./src/screens/ShortCutTab/MarketplaceCategory";
-import MarketplaceProductDetail from "./src/screens/ShortCutTab/MarketplaceProductDetail";
-import MarketplaceSearch from "./src/screens/Search/MarketplaceSearch";
 import NotificationOptions from "./src/screens/NotificationTab/NotificationOptions";
 import NotificationScreen from "./src/screens/NotificationTab";
 import Page from "./src/screens/Pages";
@@ -87,14 +78,6 @@ const HomeTab = () => {
         name="Comments"
         component={Comments}
       />
-    </Stack.Navigator>
-  );
-};
-
-const GroupTab = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Group" component={GroupScreen} />
     </Stack.Navigator>
   );
 };
@@ -256,6 +239,15 @@ function App() {
             name="MainTab" />
 
           <RootStack.Screen
+             options={{
+               gestureEnabled: false,
+               ...TransitionPresets.SlideFromRightIOS,
+             }}
+             name="Login"
+             component={Login}
+          />
+
+          <RootStack.Screen
             name="PostDetail"
             component={PostDetail} />
 
@@ -351,14 +343,6 @@ function App() {
             component={FullFriends}
           />
           <RootStack.Screen
-             options={{
-               gestureEnabled: false,
-               ...TransitionPresets.SlideFromRightIOS,
-             }}
-             name="Login"
-             component={Login}
-          />
-          <RootStack.Screen
             options={{ cardStyle: { backgroundColor: "transparent" } }}
             name="FriendOptions"
             component={FriendOptions}
@@ -400,37 +384,6 @@ function App() {
             name="NotificationOptions"
             component={NotificationOptions}
           />
-
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="GroupCategory"
-            component={GroupCategory}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="GroupCategories"
-            component={GroupCategories}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="GroupSearch"
-            component={GroupSearch}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="GroupProfile"
-            component={GroupProfile}
-          />
-
           <RootStack.Screen
             options={{ cardStyle: { backgroundColor: "transparent" } }}
             name="CommentsPopUp"
@@ -451,9 +404,6 @@ function App() {
             name="FullPostTool"
             component={FullPostTool}
           />
-          <RootStack.Screen name="CheckIn" component={CheckIn} />
-          <RootStack.Screen name="PhotoUploader" component={PhotoUploader} />
-          <RootStack.Screen name="LiveStream" component={LiveStream} />
         </RootStack.Navigator>
       </NavigationContainer>
       {/* </GestureHandlerRootView> */}

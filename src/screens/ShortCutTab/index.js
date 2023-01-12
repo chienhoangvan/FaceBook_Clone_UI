@@ -34,14 +34,8 @@ class index extends Component {
   onPressWatchVideoHandler() {
     navigation.navigate("Watch");
   }
-  onPressGroupsHandler() {
-    navigation.navigate("Group");
-  }
   onpressFriendAroundHandler() {
     navigation.navigate("FindFriends");
-  }
-  onPressMarketplaceHandler() {
-    navigation.navigate("Marketplace");
   }
   onPressLogoutHandler() {
     navigation.navigate("Login");
@@ -125,7 +119,6 @@ class index extends Component {
             </View>
           </ExTouchableOpacity>
           <ExTouchableOpacity
-            onPress={this.onPressGroupsHandler}
             style={styles.btnOption}
           >
             <Image
