@@ -63,8 +63,8 @@ export const SearchPagesSuccess = (pages) => {
 }
 //
 //
-export const SearchPostsRequest = (keyword) => {
-    const taskURI = '/posts?_expand=user&content_like=' + keyword
+export const SearchPostsRequest = (token, index, count, keyword) => {
+    const taskURI = `/search/search?token=${token}&index=${index}&count=${count}&keyword=${keyword}`
     return (dispatch) => {
         axios.get(taskURI).then(v => {
             const posts = v.data

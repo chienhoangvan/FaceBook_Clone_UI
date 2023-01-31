@@ -28,8 +28,8 @@ export const FetchGroupHistoriesSuccess = (groups) => {
         payload: groups
     }
 }
-export const FetchHomeHistoriesRequest = () => {
-    const taskURI = '/search_recents?_expand=user&_expand=page&_expand=group'
+export const FetchHomeHistoriesRequest = (token,index, count) => {
+    const taskURI = `/search/get_saved_search?token=${token}&index=${index}&count=${count}`
     return (dispatch) => {
         axios.get(taskURI).then(result => {
             const searchs = result.data

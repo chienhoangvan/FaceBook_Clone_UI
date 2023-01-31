@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "dbstart": "json-server .mock-db/db.json --host 192.168.2.12"
+    "dbstart": "json-server .mock-db/db.json --host 192.168.43.50"
   },
   "dependencies": {
     "@react-navigation/material-top-tabs": "^6.3.1",

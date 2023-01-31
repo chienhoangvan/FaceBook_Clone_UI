@@ -1,15 +1,14 @@
 import { userActions } from '../constants'
 import axios from 'axios'
-export const LoginRequest = (username, password) => {
-    const taskURI = `/users?username=${username}&password=${password}`
+export const LoginRequest = (phonenumber, password) => {
+    const taskURI = `/auth/login?phonenumber=${phonenumber}&password=${password}`
     return (dispatch) => {
         axios.get(taskURI).then(v => {
-            const users = v.data
-            if (users.length > 0) {
-                let user = users[0]
-                dispatch(FetchHighLightPhotosRequest(user.id))
-                dispatch(FetchFriendsRequest(user.id))
-                dispatch(FetchProfilePostsRequest(user.id))
+            const user = v.data
+            if (user.length > 0) {
+                let user = user
+                dispatch(FetchUserFriends(user.token, user.id))
+                dispatch(FetchProfilePostsRequest(user.token))
                 const watch_list = user.watch_list.slice(0, 3).map(page => page.pageId)
                 const watchListQuery = watch_list.join("&id=")
                 let taskURI2 = `/pages?id=${watchListQuery}`
@@ -68,8 +67,8 @@ export const FetchHighLightPhotosSuccess = (photos) => {
     }
 }
 //Friends
-export const FetchFriendsRequest = (userId) => {
-    const taskURI = `/users/${userId}`
+export const FetchUserFriends = (token, userId) => {
+    const taskURI = `/friend/get_user_friends?token=${token}&user_id=${userId}&page=1`
     return (dispatch) => {
         axios.get(taskURI).then(v => {
             const user = v.data
@@ -106,8 +105,8 @@ export const FetchFriendsSuccess = (friends) => {
     }
 }
 //Profie posts
-export const FetchProfilePostsRequest = (userId) => {
-    const taskURI = `users/${userId}/posts?_expand=user`
+export const FetchProfilePostsRequest = (token) => {
+    const taskURI = `/post/get_list_posts?token=${token}&last_id=0&index=0&count=20`
     return (dispatch) => {
         axios.get(taskURI).then(v => {
             const posts = v.data
