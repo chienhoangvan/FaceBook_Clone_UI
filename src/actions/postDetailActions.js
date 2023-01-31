@@ -3,7 +3,7 @@ import axios from 'axios'
 export const FetchPostDetailRequest = (token, id) => {
     const taskURI = `/post/get_post?token=${token}&id=${id}`
     return (dispatch) => {
-        axios.get(taskURI).then(result => {
+        axios.post(taskURI).then(result => {
             const showingPost = {
                 postDetail: result.data,
                 isShowModal,

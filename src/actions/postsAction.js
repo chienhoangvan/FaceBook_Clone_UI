@@ -4,7 +4,7 @@ export const FetchPostsRequest = (token, lastId, index, count)=>{
     const taskURI = `/post/get_list_posts?token=${token}&last_id=${lastId}&index=${index}&count=${count}`
     return (dispatch)=>{
         dispatch(FetchDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const posts = v.data
             dispatch(FetchPostsSuccess(posts))
         }).catch(error =>{
@@ -30,11 +30,24 @@ export const FetchPostsSuccess = (posts)=>{
     }
 }
 
+export const FetchGetListPostsProfileRequest = (token, count, index, target_id)=>{
+    const taskURI = `/post/get_list_posts_in_profile?token=${token}&count=${count}&index=${index}&targetId=${target_id}`
+    return (dispatch)=>{
+        dispatch(FetchDefaultState())
+        axios.post(taskURI).then(v => {
+            const posts = v.data
+            dispatch(FetchPostsSuccess(posts))
+        }).catch(error =>{
+            dispatch(FetchPostsFailure(error))
+        })
+    }
+}
+
 export const FetchAddPostsRequest = (token, described, status)=>{
     const taskURI = `/post/add_post?token=${token}&described=${described}&status=${status}`
     return (dispatch)=>{
         dispatch(FetchAddDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const post = v.data
             dispatch(FetchAddPostsSuccess(post))
         }).catch(error =>{
@@ -64,7 +77,7 @@ export const FetchEditPostsRequest = (token, id, described, status, image_del)=>
     const taskURI = `/post/edit_post?token=${token}&id=${id}&described=${described}&status=${status}&image_del=${image_del}`
     return (dispatch)=>{
         dispatch(FetchEditDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const post = v.data
             dispatch(FetchEditPostsSuccess(post))
         }).catch(error =>{
@@ -94,7 +107,7 @@ export const FetchDeletePostsRequest = (token, id)=>{
     const taskURI = `/delete_post?token=${token}&id=${id}`
     return (dispatch)=>{
         dispatch(FetchDeleteDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const post = v.data
             dispatch(FetchDeletePostsSuccess(post))
         }).catch(error =>{

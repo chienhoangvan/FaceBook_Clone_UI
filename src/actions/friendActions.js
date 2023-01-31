@@ -4,7 +4,7 @@ import axios from 'axios'
 export const FetchRecommendFriendsRequest = (token, index, count) => {
     const taskURI = `/friend/get_list_suggested_friends?token=${token}&index=${index}&count=${count}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const friends = v.data
             dispatch(FetchRecommendFriendsSuccess(friends))
         }).catch(error => {
@@ -33,7 +33,7 @@ export const FetchRecommendFriendsSuccess = (friends) => {
 export const FetchFriendRequestsRequest = (token, index, count) => {
     const taskURI = `/friend/get_requested_friends?token=${token}&index=${index}&count=${count}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const friends = v.data
             dispatch(FetchFriendRequestsSuccess(friends))
         }).catch(error => {
@@ -57,7 +57,7 @@ export const FetchFriendRequestsSuccess = (friends) => {
 export const FetchSetRequestFriendRequest = (token, user_id) => {
     const taskURI = `/friend/set_request_friend?token=${token}&user_id=${user_id}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const friend = v.data
             dispatch(FetchSetRequestFriendSuccess(friend))
         }).catch(error => {
@@ -81,7 +81,7 @@ export const FetchSetRequestFriendSuccess = (friend) => {
 export const FetchSetAcceptFriendRequest = (token, user_id) => {
     const taskURI = `/friend/set_accept_friend?token=${token}&user_id=${user_id}&is_accept=1`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const friend = v.data
             dispatch(FetchSetAcceptFriendSuccess(friend))
         }).catch(error => {
@@ -105,7 +105,7 @@ export const FetchSetAcceptFriendSuccess = (friend) => {
 export const FetchGetUserFriendsRequest = (token, user_id, page) => {
     const taskURI = `/friend/get_user_friends?token=${token}&user_id=${user_id}&page=${page}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const friends = v.data
             dispatch(FetchGetUserFriendsSuccess(friends))
         }).catch(error => {
@@ -123,5 +123,53 @@ export const FetchGetUserFriendsSuccess = (friends) => {
     return {
         type: friendActions.FETCH_GET_USER_FRIENDS_SUCCESS,
         payload: friends
+    }
+}
+
+export const FetchSetBlockRequest = (token, user_id, type) => {
+    const taskURI = `/friend/set_block?token=${token}&user_id=${user_id}&type=${type}`
+    return (dispatch) => {
+        axios.post(taskURI).then(v => {
+            const block = v.data
+            dispatch(FetchSetBlockSuccess(block))
+        }).catch(error => {
+            dispatch(FetchSetBlockFailure(error))
+        })
+    }
+}
+export const FetchSetBlockFailure = (error) => {
+    return {
+        type: friendActions.FETCH_SET_BLOCK_FAILURE,
+        error
+    }
+}
+export const FetchSetBlockSuccess = (block) => {
+    return {
+        type: friendActions.FETCH_SET_BLOCK_SUCCESS,
+        payload: block
+    }
+}
+
+export const FetchGetListBlockRequest = (token, index, count) => {
+    const taskURI = `/friend/get_list_blocks?token=${token}&index=${index}&count=${count}`
+    return (dispatch) => {
+        axios.get(taskURI).then(v => {
+            const blocks = v.data
+            dispatch(FetchGetListBlockSuccess(blocks))
+        }).catch(error => {
+            dispatch(FetchGetListBlockFailure(error))
+        })
+    }
+}
+export const FetchGetListBlockFailure = (error) => {
+    return {
+        type: friendActions.FETCH_GET_LIST_BLOCK_FAILURE,
+        error
+    }
+}
+export const FetchGetListBlockSuccess = (blocks) => {
+    return {
+        type: friendActions.FETCH_GET_LIST_BLOCK_SUCCESS,
+        payload: blocks
     }
 }

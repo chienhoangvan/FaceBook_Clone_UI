@@ -66,7 +66,7 @@ export const SearchPagesSuccess = (pages) => {
 export const SearchPostsRequest = (token, index, count, keyword) => {
     const taskURI = `/search/search?token=${token}&index=${index}&count=${count}&keyword=${keyword}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const posts = v.data
             dispatch(SearchPostsSuccess(posts))
         }).catch(error => {
@@ -87,6 +87,53 @@ export const SearchPostsSuccess = (posts) => {
     }
 }
 //
+export const FetchGetSaveSearchRequest = (token, index, count) => {
+    const taskURI = `/search/get_saved_search?token=${token}&index=${index}&count=${count}`
+    return (dispatch) => {
+        axios.post(taskURI).then(v => {
+            const searchs = v.data
+            dispatch(FetchGetSaveSearchSuccess(searchs))
+        }).catch(error => {
+            dispatch(FetchGetSaveSearchFailure(error))
+        })
+    }
+}
+export const FetchGetSaveSearchFailure = (error) => {
+    return {
+        type: searchingActions.FETCH_GET_SAVE_SEARCH_FAILURE,
+        error
+    }
+}
+export const FetchGetSaveSearchSuccess = (searchs) => {
+    return {
+        type: searchingActions.FETCH_GET_SAVE_SEARCH_REQUEST,
+        payload: searchs
+    }
+}
+//
+export const FetchDeleteSavedSearchRequest = (token, all, search_id) => {
+    const taskURI = `/search/del_saved_search?token=${token}&all=${all}&search_id=${search_id}`
+    return (dispatch) => {
+        axios.post(taskURI).then(v => {
+            const search = v.data
+            dispatch(FetchDeleteSavedSearchSuccess(search))
+        }).catch(error => {
+            dispatch(FetchDeleteSavedSearchFailure(error))
+        })
+    }
+}
+export const FetchDeleteSavedSearchFailure = (error) => {
+    return {
+        type: searchingActions.FETCH_DELETE_SAVED_SEARCH_FAILURE,
+        error
+    }
+}
+export const FetchDeleteSavedSearchSuccess = (search) => {
+    return {
+        type: searchingActions.FETCH_DELETE_SAVED_SEARCH_REQUEST,
+        payload: search
+    }
+}
 //
 export const SearchGroupsRequest = (keyword) => {
     const taskURI = '/groups?name_like=' + keyword

@@ -3,7 +3,7 @@ import axios from 'axios'
 export const FetchWatchVideosRequest = (token, lastId, index, count) => {
     const taskURI = `/post/get_list_videos?token=${token}&last_id=${lastId}&index=${index}&count=${count}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             let videos = v.data
             dispatch(FetchWatchVideosSuccess(videos))
         }).catch(error => {

@@ -31,7 +31,7 @@ export const FetchGroupHistoriesSuccess = (groups) => {
 export const FetchHomeHistoriesRequest = (token,index, count) => {
     const taskURI = `/search/get_saved_search?token=${token}&index=${index}&count=${count}`
     return (dispatch) => {
-        axios.get(taskURI).then(result => {
+        axios.post(taskURI).then(result => {
             const searchs = result.data
             dispatch(FetchHomeHistoriesSuccess(searchs))
         }).catch(error => {

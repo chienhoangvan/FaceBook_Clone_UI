@@ -1,10 +1,10 @@
-import {likeActions} from '../constants'
+import {commentActions} from '../constants'
 import axios from 'axios'
 export const FetchSetCommentRequest = (token, id, comment, index, count)=>{
     const taskURI = `/comment/set_comment?token=${token}&id=${id}&comment=${comment}&index=${index}&count=${count}`
     return (dispatch)=>{
         dispatch(FetchDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const comment = v.data
             dispatch(FetchSetCommentSuccess(comment))
         }).catch(error =>{
@@ -34,7 +34,7 @@ export const FetchGetCommentRequest = (token, id, index, count)=>{
     const taskURI = `/comment/get_comment?token=${token}&id=${id}&index=${index}&count=${count}`
     return (dispatch)=>{
         dispatch(FetchGetDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const comments = v.data
             dispatch(FetchGetCommentSuccess(comments))
         }).catch(error =>{

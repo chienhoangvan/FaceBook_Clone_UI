@@ -4,11 +4,11 @@ export const FetchLikeRequest = (token, postId)=>{
     const taskURI = `/like/like?token=${token}&id=${postId}`
     return (dispatch)=>{
         dispatch(FetchDefaultState())
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const like = v.data
             dispatch(FetchLikeSuccess(like))
         }).catch(error =>{
-            dispatch(FetchLikeFailure(like))
+            dispatch(FetchLikeFailure(error))
         })
     }
 }

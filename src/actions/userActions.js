@@ -3,7 +3,7 @@ import axios from 'axios'
 export const LoginRequest = (phonenumber, password) => {
     const taskURI = `/auth/login?phonenumber=${phonenumber}&password=${password}`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const user = v.data
             if (user.length > 0) {
                 let user = user
@@ -19,7 +19,6 @@ export const LoginRequest = (phonenumber, password) => {
                 }).catch(error => {
                     dispatch(LoginFailure(error))
                 })
-
             } else dispatch(LoginFailure({ message: "Your email and password are not correct!" }))
         }).catch(error => {
             dispatch(LoginFailure(error))
@@ -70,7 +69,7 @@ export const FetchHighLightPhotosSuccess = (photos) => {
 export const FetchUserFriends = (token, userId) => {
     const taskURI = `/friend/get_user_friends?token=${token}&user_id=${userId}&page=1`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const user = v.data
             const friendsWithRecent = user.friends
             const ids = friendsWithRecent?.map(friend => friend.userId)
@@ -108,7 +107,7 @@ export const FetchFriendsSuccess = (friends) => {
 export const FetchProfilePostsRequest = (token) => {
     const taskURI = `/post/get_list_posts?token=${token}&last_id=0&index=0&count=20`
     return (dispatch) => {
-        axios.get(taskURI).then(v => {
+        axios.post(taskURI).then(v => {
             const posts = v.data
             dispatch(FetchProfilePostsSuccess(posts))
         }).catch(error => {
