@@ -29,7 +29,7 @@ export const FetchPostsSuccess = (posts)=>{
         payload:posts
     }
 }
-
+//Profie posts
 export const FetchGetListPostsProfileRequest = (token, count, index, target_id)=>{
     const taskURI = `/post/get_list_posts_in_profile?token=${token}&count=${count}&index=${index}&targetId=${target_id}`
     return (dispatch)=>{

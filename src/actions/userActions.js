@@ -103,27 +103,51 @@ export const FetchFriendsSuccess = (friends) => {
         payload: friends
     }
 }
-//Profie posts
-export const FetchProfilePostsRequest = (token) => {
-    const taskURI = `/post/get_list_posts?token=${token}&last_id=0&index=0&count=20`
+//Info user
+export const FetchGetUserInfoRequest = (token, user_id) => {
+    const taskURI = `/user/get_user_info?token=${token}&user_id=${user_id}`
     return (dispatch) => {
         axios.post(taskURI).then(v => {
-            const posts = v.data
-            dispatch(FetchProfilePostsSuccess(posts))
+            const user = v.data
+            dispatch(FetchGetUserInfoSuccess(user))
         }).catch(error => {
-            dispatch(FetchProfilePostsFailure(error))
+            dispatch(FetchGetUserInfoFailure(error))
         })
     }
 }
-export const FetchProfilePostsFailure = (error) => {
+export const FetchGetUserInfoFailure = (error) => {
     return {
-        type: userActions.FETCH_PROFILE_POSTS_FAILURE,
+        type: userActions.FETCH_GET_USER_INFO_FAILURE,
         error
     }
 }
-export const FetchProfilePostsSuccess = (posts) => {
+export const FetchGetUserInfoSuccess = (user) => {
     return {
-        type: userActions.FETCH_PROFILE_POSTS_SUCCESS,
-        payload: posts
+        type: userActions.FETCH_GET_USER_INFO_SUCCESS,
+        payload: user
+    }
+}
+
+export const FetchSetUserInfoRequest = (token, username, description, address, city, country) => {
+    const taskURI = `/user/set_user_info?token=${token}&username=${username}&description=${description}&address=${address}&city=${city}&country=${country}`
+    return (dispatch) => {
+        axios.post(taskURI).then(v => {
+            const user = v.data
+            dispatch(FetchSetUserInfoSuccess(user))
+        }).catch(error => {
+            dispatch(FetchGetUserInfoFailure(error))
+        })
+    }
+}
+export const FetchSetUserInfoFailure = (error) => {
+    return {
+        type: userActions.FETCH_SET_USER_INFO_FAILURE,
+        error
+    }
+}
+export const FetchSetUserInfoSuccess = (user) => {
+    return {
+        type: userActions.FETCH_SET_USER_INFO_SUCCESS,
+        payload: user
     }
 }

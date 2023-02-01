@@ -78,8 +78,8 @@ export const FetchSetRequestFriendSuccess = (friend) => {
     }
 }
 
-export const FetchSetAcceptFriendRequest = (token, user_id) => {
-    const taskURI = `/friend/set_accept_friend?token=${token}&user_id=${user_id}&is_accept=1`
+export const FetchSetAcceptFriendRequest = (token, user_id, is_accept) => {
+    const taskURI = `/friend/set_accept_friend?token=${token}&user_id=${user_id}&is_accept=${is_accept}`
     return (dispatch) => {
         axios.post(taskURI).then(v => {
             const friend = v.data
