@@ -14,7 +14,6 @@ import Item from "../components/Item";
 import { LoginRequest } from "../actions/userActions";
 import PostTool from "../components/PostTool";
 import RecommendFriends from "../components/RecommendFriends";
-import Stories from "../components/Stories";
 import { connect } from "react-redux";
 
 class Home extends Component {

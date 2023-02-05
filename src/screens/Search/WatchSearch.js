@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { TouchableOpacity, Text, StyleSheet, View, TextInput, SafeAreaView, Dimensions, Image } from 'react-native'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import * as navigation from '../../rootNavigation'
-import GroupCategories from '../../components/GroupCategories'
 import { FetchGroupHistoriesRequest } from '../../actions/historyActions'
 import { connect } from 'react-redux'
 import ExTouchableOpacity from '../../components/ExTouchableOpacity'
@@ -14,9 +13,6 @@ class WatchSearch extends PureComponent {
     componentDidMount() {
         const { fetchGroupHistories } = this.props
         fetchGroupHistories()
-    }
-    onPressGroupCategoriesHandler() {
-        navigation.push('GroupCategories')
     }
     onPressSeenVideosHandler() {
         navigation.push('SeenVideos')
