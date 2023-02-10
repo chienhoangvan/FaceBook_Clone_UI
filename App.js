@@ -1,415 +1,52 @@
-import * as React from "react";
+import { StatusBar } from "expo-status-bar";
 
-import { BASE_URL, STATUSBAR_HEIGHT } from "./src/constants";
-import {
-  CheckIn,
-  FullPostTool,
-  LiveStream,
-  PhotoUploader,
-} from "./src/screens/PostTools/";
-import { NavigationContainer, useIsFocused } from "@react-navigation/native";
-import {
-  TransitionPresets,
-  createStackNavigator,
-} from "@react-navigation/stack";
-
-import AvatarOptions from "./src/screens/ProfileTab/AvatarOptions";
-import Camera from "./src/screens/CameraTool";
-import Comments from "./src/screens/Comments";
-import CommentsPopUp from "./src/screens/CommentsPopUp";
-import EditPublicInfo from "./src/screens/ProfileTab/EditPublicInfo";
-import FindFriends from "./src/screens/ProfileTab/FindFriends";
-import FriendOptions from "./src/screens/ProfileTab/FriendOptions";
-import FriendRequests from "./src/screens/ProfileTab/FriendRequests";
-import FullFriends from "./src/screens/ProfileTab/FullFriends";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Home from "./src/screens/Home";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import NotificationOptions from "./src/screens/NotificationTab/NotificationOptions";
-import NotificationScreen from "./src/screens/NotificationTab";
-import Page from "./src/screens/Pages";
-import PagePostDetail from "./src/screens/Pages/PagePostDetail";
-import PhotoChooser from "./src/screens/PhotoChooser";
-import { Platform } from "react-native";
-import PostDetail from "./src/screens/PostDetail";
-import PostOptions from "./src/screens/PostOptions";
-import ProfilePostOptions from "./src/screens/ProfileTab/ProfilePostOptions";
-import ProfileScreen from "./src/screens/ProfileTab";
-import ProfileSetting from "./src/screens/ProfileTab/ProfileSetting";
-import ProfileX from "./src/screens/ProfileTab/ProfileX";
-import { Provider } from "react-redux";
-import Result from "./src/screens/Search/Result";
-import Search from "./src/screens/Search/";
-import SeenVideos from "./src/screens/WatchTab/SeenVideos";
-import SharePost from "./src/screens/SharePost";
-import ShortCutScreen from "./src/screens/ShortCutTab";
-import WatchDetail from "./src/screens/WatchTab/WatchDetail";
-import WatchDetailList from "./src/screens/WatchTab/WatchDetailList";
-import WatchOptions from "./src/screens/WatchTab/WatchOptions";
-import WatchScreen from "./src/screens/WatchTab";
-import WatchSearch from "./src/screens/Search/WatchSearch";
-import axios from "axios";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { navigationRef } from "./src/rootNavigation";
-import store from "./src/store";
-import Login from "./src/screens/LoginTab/Login";
+import Login from "./screen/login/Login";
+import Register from "./screen/register/Register";
+import Layout from "./components/Layout";
+import Home from "./screen/home/Home";
+import Messenger from "./screen/messenger/Messenger";
+import Friend from "./screen/friends/Friend";
+import FriendInvite from "./screen/friends/FriendInvite";
+import SuggestionFriend from "./screen/friends/SuggestionFriend";
+import Notification from "./screen/notification/Notification";
+import Information from "./screen/information/Information";
+import Menu from "./screen/menu/Menu";
+import OtpPhone from "./screen/otpPhone/OtpPhone";
+import AddPost from "./screen/posts/AddPost";
+import ShowInfor from "./screen/user/ShowInfor";
+import EditPost from "./screen/posts/EditPost";
+import InforFriend from "./screen/friends/InforFriend";
 
-const Tab = createMaterialTopTabNavigator();
-const Stack = createNativeStackNavigator();
-const RootStack = createNativeStackNavigator();
+export default function App() {
+    const Stack = createNativeStackNavigator();
 
-axios.defaults.baseURL = BASE_URL;
-
-const HomeTab = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        ...TransitionPresets.ModalSlideFromBottomIOS,
-        gestureResponseDistance: { vertical: 800 },
-      }}
-    >
-      <Stack.Screen name="Home" component={Home} />
-
-      <Stack.Screen
-        options={{ cardStyle: { backgroundColor: "transparent" } }}
-        name="Comments"
-        component={Comments}
-      />
-    </Stack.Navigator>
-  );
-};
-
-
-const FriendTab = () => {
-  return (
-    <Stack.Navigator screenOptions = {{ headerShown: false }}>
-      <Stack.Screen name="Friend Requests" component={FriendRequests} />
-    </Stack.Navigator>
-  )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{ headerShown: false, animation: "none" }}>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Messenger" component={Messenger} />
+                <Stack.Screen name="Register" component={Register} />
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Friend" component={Friend} />
+                <Stack.Screen name="FriendInvite" component={FriendInvite} />
+                <Stack.Screen name="SuggestionFriend" component={SuggestionFriend} />
+                <Stack.Screen name="Layout" component={Layout} />
+                <Stack.Screen name="Notification" component={Notification} />
+                <Stack.Screen name="Information" component={Information} />
+                <Stack.Screen name="Menu" component={Menu} />
+                <Stack.Screen name="OtpPhone" component={OtpPhone} />
+                <Stack.Screen name="AddPost" component={AddPost} />
+                <Stack.Screen name="ShowInfor" component={ShowInfor} />
+                <Stack.Screen name="EditPost" component={EditPost} />
+                <Stack.Screen name="InforFriend" component={InforFriend} />
+            </Stack.Navigator>
+            <StatusBar style="auto" />
+        </NavigationContainer>
+    );
 }
 
-const WatchScreenWithIsFocused = (props) => {
-  const isFocused = useIsFocused();
-  return <WatchScreen {...props} isFocused={isFocused}></WatchScreen>;
-};
-
-const WatchTab = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Watch" component={WatchScreenWithIsFocused} />
-    </Stack.Navigator>
-  );
-};
-
-const ProfileTab = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-};
-
-const NotificationTab = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Notification" component={NotificationScreen} />
-    </Stack.Navigator>
-  );
-};
-
-const ShortCutTab = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="ShortCutIndex" component={ShortCutScreen} />
-    </Stack.Navigator>
-  );
-};
-
-const MainTab = () => {
-  const navigationOptions = {
-    style: {
-      paddingTop: STATUSBAR_HEIGHT,
-    },
-    showIcon: true,
-  };
-  return (
-    <Tab.Navigator screenOptions={navigationOptions}>
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="home"
-              size={20}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Home"
-        component={HomeTab}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="user-friends"
-              size={20}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Friends"
-        component={FriendTab}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="video"
-              size={20}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Watch"
-        component={WatchTab}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="user-circle"
-              size={22}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Profile"
-        component={ProfileTab}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="bell"
-              size={22}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Notifi"
-        component={NotificationTab}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Icon
-              name="bars"
-              size={20}
-              color={focused ? "#318bfb" : "#ddd"}
-            ></Icon>
-          ),
-        }}
-        name="Short"
-        component={ShortCutTab}
-      />
-    </Tab.Navigator>
-  );
-};
-
-function App() {
-  const TransitionPreset =
-    Platform.OS === "ios" ? TransitionPresets.ModalSlideFromBottomIOS : {};
-  const navigationOptions = {
-    headerShown: false,
-    ...TransitionPreset,
-    gestureResponseDistance: {
-      vertical: 800,
-    },
-  };
-  return (
-    <Provider store={store}>
-
-      <NavigationContainer ref={navigationRef}>
-        <RootStack.Navigator screenOptions={navigationOptions}>
-
-          <RootStack.Screen
-            component={MainTab}
-            name="MainTab" />
-
-          <RootStack.Screen
-            name="PostDetail"
-            component={PostDetail} />
-
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="Page"
-            component={Page}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: true }}
-            name="PagePostDetail"
-            component={PagePostDetail}
-          />
-
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="PhotoChooser"
-            component={PhotoChooser}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="Camera"
-            component={Camera}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="Search"
-            component={Search}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="Result"
-            component={Result}
-          />
-
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="WatchOptions"
-            component={WatchOptions}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="WatchSearch"
-            component={WatchSearch}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="SeenVideos"
-            component={SeenVideos}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: true }}
-            name="WatchDetail"
-            component={WatchDetail}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="WatchDetailList"
-            component={WatchDetailList}
-          />
-
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="ProfilePostOptions"
-            component={ProfilePostOptions}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="EditPublicInfo"
-            component={EditPublicInfo}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="FullFriends"
-            component={FullFriends}
-          />
-          <RootStack.Screen
-             options={{
-               gestureEnabled: false,
-               ...TransitionPresets.SlideFromRightIOS,
-             }}
-             name="Login"
-             component={Login}
-          />
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="FriendOptions"
-            component={FriendOptions}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="FindFriends"
-            component={FindFriends}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="FriendRequests"
-            component={FriendRequests}
-          />
-          <RootStack.Screen
-            options={{
-              gestureEnabled: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-            name="ProfileSetting"
-            component={ProfileSetting}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="ProfileX"
-            component={ProfileX}
-          />
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="AvatarOptions"
-            component={AvatarOptions}
-          />
-
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="NotificationOptions"
-            component={NotificationOptions}
-          />
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="CommentsPopUp"
-            component={CommentsPopUp}
-          />
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="SharePost"
-            component={SharePost}
-          />
-          <RootStack.Screen
-            options={{ cardStyle: { backgroundColor: "transparent" } }}
-            name="PostOptions"
-            component={PostOptions}
-          />
-          <RootStack.Screen
-            options={{ gestureEnabled: false }}
-            name="FullPostTool"
-            component={FullPostTool}
-          />
-          <RootStack.Screen name="CheckIn" component={CheckIn} />
-          <RootStack.Screen name="PhotoUploader" component={PhotoUploader} />
-          <RootStack.Screen name="LiveStream" component={LiveStream} />
-        </RootStack.Navigator>
-      </NavigationContainer>
-      {/* </GestureHandlerRootView> */}
-    </Provider>
-  );
-}
-export default App;
+const styles = StyleSheet.create({});

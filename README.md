@@ -1,11 +1,4 @@
-# FaceBook_Clone_UI
-Prepare: 
- - Clone repo
- - Use the package manager npm:
-  + npm install
-  + npm install json-server -g
- - Config the variable BASE_URL in src/constants/index.js to your private ip example 192.168.1.x:3000
-
-Run project: 
- - npm run dbstart: run server db mocked
- - npm run android: run android app
+# Facebook_GR10
+# Bài tập lớn Đa nền tảng nhóm 10
+# install expo : npm install expo-cli --global
+## Sử dụng npm i để cài đặt các thư viện sau đó dùng lệnh npm start để khởi chạy và dùng expo cli để quét.
