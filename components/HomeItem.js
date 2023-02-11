@@ -14,6 +14,7 @@ import ThreePicture from "./ThreePicture";
 import FourPicture from "./FourPicture";
 import DeletePost from "./DeletePost";
 import { Video } from "expo-av";
+import moment from "moment";
 
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -41,6 +42,7 @@ export default function HomeItem({
   const [like, setLike] = useState(liked);
   const [showComment, setShowComment] = useState(false);
   const [shouldPlay, setShouldPlay] = useState(true);
+  const [timeNow, setTimeNow] = useState(null);
   const navigation = useNavigation();
   const handleLikePost = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -110,6 +112,27 @@ export default function HomeItem({
     showInfor();
   }, [navigation]);
 
+  const handleTime = (time) => {
+    const createdAt = new Date(time);
+    const now = new Date();
+    const timeDiff = now - createdAt;
+    const timeDiffInMinutes = timeDiff / 1000 / 60;
+    let result = "";
+    if (timeDiffInMinutes < 1) {
+      result = `Vừa xong`;
+    } else if (timeDiffInMinutes < 60) {
+      result = `${timeDiffInMinutes.toFixed(0)} phút trước`;
+    } else if (timeDiffInMinutes < 1440) {
+      const hours = Math.floor(timeDiffInMinutes / 60);
+      const minutes = (timeDiffInMinutes % 60).toFixed(0);
+      result = `${hours} giờ ${minutes} phút trước`;
+    } else {
+      const days = Math.floor(timeDiffInMinutes / 1440);
+      result = `${days} ngày trước`;
+    }
+    return result;
+  };
+
   return (
     <View style={styles.homeItem}>
       {modalVisible && (
@@ -131,20 +154,34 @@ export default function HomeItem({
         />
       )}
       <View style={styles.header}>
-        <View style={styles.imageAvater}>
-          <Image
-            source={{
-              uri: getInfor.avatar,
-            }}
-            style={styles.avatar}
-          />
-        </View>
-        <View style={styles.infor}>
-          <Text style={styles.textInfor}>{getInfor.username}</Text>
-          <View>
-            <Text>{time}h</Text>
+        <TouchableOpacity
+          style={styles.ItemUser}
+          onPress={() =>
+            page === "home"
+              ? navigation.navigate("InforFriend", {
+                  avatar: getInfor.avatar,
+                  idUser: getInfor._id,
+                  username: getInfor.username,
+                  cover_image: getInfor.cover_image,
+                  text: "Bạn bè",
+                })
+              : ""
+          }>
+          <View style={styles.imageAvater}>
+            <Image
+              source={{
+                uri: getInfor.avatar,
+              }}
+              style={styles.avatar}
+            />
           </View>
-        </View>
+          <View style={styles.infor}>
+            <Text style={styles.textInfor}>{getInfor.username}</Text>
+            <View>
+              <Text>{handleTime(time)}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
         {page === "home" ? (
           ""
         ) : (
@@ -271,6 +308,11 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  ItemUser: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 1,
   },
   avatar: {
     borderRadius: 50,

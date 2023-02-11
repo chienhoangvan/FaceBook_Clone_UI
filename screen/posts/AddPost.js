@@ -25,7 +25,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AddPost({ navigation }) {
+function AddPost({ navigation, route }) {
+  const { avatar, username } = route.params;
   const [vertical, setVertical] = useState(false);
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -93,7 +94,7 @@ function AddPost({ navigation }) {
   };
 
   const handlePost = async () => {
-    Uploadvideo();
+    // Uploadvideo();
     let responseImage = [];
     for (let i = 0; i < selectedImages.length; i++) {
       const fileName = "img-" + new Date().getTime();
@@ -147,9 +148,7 @@ function AddPost({ navigation }) {
       .then((response) => {
         if (response !== undefined) {
           // console.log(response.data.described);
-          navigation.replace("Home", {
-            _id: response.data._id,
-          });
+          navigation.replace("Home");
         }
       })
       .catch((error) => {
@@ -187,13 +186,13 @@ function AddPost({ navigation }) {
               <View style={styles.imageAvater}>
                 <Image
                   source={{
-                    uri: "https://haycafe.vn/wp-content/uploads/2022/07/anh-wibu-co-gai-va-mat-na-cao.jpg",
+                    uri: avatar,
                   }}
                   style={styles.avatar}
                 />
               </View>
               <View style={styles.infor}>
-                <Text style={styles.textInfor}>Pham Minh</Text>
+                <Text style={styles.textInfor}>{username}</Text>
                 <TouchableOpacity style={styles.inforBottom}>
                   <FontAwesome5 name="user-friends" size={16} color="#666" />
                   <Text style={styles.textinforBottom}>Bạn bè</Text>
@@ -465,6 +464,7 @@ const styles = StyleSheet.create({
   imagePickerContainer: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "white",
+    marginTop: -30,
     zIndex: 9,
   },
 });
