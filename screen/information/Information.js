@@ -146,7 +146,7 @@ export default function Information({ navigation, route }) {
           .map((Item, index) => (
             <View style={styles.body} key={index}>
               <HomeItem
-                time="{Item.time}"
+                time="{Item.createdAt}"
                 textContent={Item.described}
                 Img={Item.images}
                 idPost={Item._id}

@@ -77,9 +77,9 @@ export default function Friends({ route }) {
                   avatar={Friend.avatar}
                   mutual="1"
                   username={Friend.username}
-                  text={"Thêm bạn bè"}
+                  text={"Bạn bè"}
                   id={Friend._id}
-                  time="{Item.time}"
+                  time="{Friend.createdAt}"
                 />
               </View>
             ))}

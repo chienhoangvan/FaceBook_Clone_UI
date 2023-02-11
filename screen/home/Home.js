@@ -99,7 +99,12 @@ function Home({ navigation, route }) {
           <View style={styles.search}>
             <TouchableOpacity
               style={styles.searchButton}
-              onPress={() => navigation.navigate("AddPost")}>
+              onPress={() =>
+                navigation.navigate("AddPost", {
+                  avatar: getInfor.avatar,
+                  username: getInfor.username,
+                })
+              }>
               <Text style={styles.textSearch}>Bạn đang nghĩ gì?</Text>
             </TouchableOpacity>
           </View>
@@ -109,7 +114,7 @@ function Home({ navigation, route }) {
           .map((Item, index) => (
             <View style={styles.body} key={index}>
               <HomeItem
-                time="{Item.time}"
+                time="{Item.createdAt}"
                 textContent={Item.described}
                 Img={Item.images}
                 idPost={Item._id}
