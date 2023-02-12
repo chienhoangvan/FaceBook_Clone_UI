@@ -79,7 +79,7 @@ export default function Friends({ route }) {
                   username={Friend.username}
                   text={"Bạn bè"}
                   id={Friend._id}
-                  time="{Friend.createdAt}"
+                  time={Friend.createdAt}
                 />
               </View>
             ))}

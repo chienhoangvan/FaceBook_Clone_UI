@@ -114,7 +114,7 @@ function Home({ navigation, route }) {
           .map((Item, index) => (
             <View style={styles.body} key={index}>
               <HomeItem
-                time="{Item.createdAt}"
+                time={Item.createdAt}
                 textContent={Item.described}
                 Img={Item.images}
                 idPost={Item._id}
