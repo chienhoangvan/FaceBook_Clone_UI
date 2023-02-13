@@ -28,34 +28,69 @@ export default function InforFriend({ navigation, route }) {
   const [getInfor, setGetInfor] = useState({});
   const [getListPost, setGetListPost] = useState([]);
 
-  //   const showInfor = async () => {
-  //     const token = await AsyncStorage.getItem("id_token");
-  //     return fetch("https://severfacebook.up.railway.app/api/v1/users/show", {
-  //       method: "GET",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         authorization: "token " + token,
-  //       },
-  //       body: JSON.stringify(),
-  //     })
-  //       .then((response) => {
-  //         const statusCode = response.status;
-  //         if (statusCode === 200) {
-  //           return (response = response.json());
-  //         } else {
-  //           alert("Load lỗi");
-  //         }
-  //       })
-  //       .then((response) => {
-  //         if (response !== undefined) {
-  //           setGetInfor(response.data);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   };
+  const showInfor = async () => {
+    const token = await AsyncStorage.getItem("id_token");
+    return fetch("https://severfacebook.up.railway.app/api/v1/users/show", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "token " + token,
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          return (response = response.json());
+        } else {
+          alert("Load lỗi");
+        }
+      })
+      .then((response) => {
+        if (response !== undefined) {
+          setGetInfor(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const blockFriend = async () => {
+    const values = {
+      user_id: idUser,
+    };
+    const token = await AsyncStorage.getItem("id_token");
+    return fetch(
+      `https://severfacebook.up.railway.app/api/v1/users/set-block-user`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          authorization: "token " + token,
+        },
+        body: JSON.stringify(values),
+      }
+    )
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          return (response = response.json());
+        } else {
+          alert("Load lỗi");
+        }
+      })
+      .then((response) => {
+        if (response !== undefined) {
+          setGetInfor(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     showListPost();
@@ -146,12 +181,15 @@ export default function InforFriend({ navigation, route }) {
                 />
                 <Text style={styles.textEditProfile}>Nhắn tin</Text>
               </TouchableOpacity>
-              <MaterialCommunityIcons
+              {/* <MaterialCommunityIcons
                 name="dots-horizontal"
                 size={24}
                 color="black"
                 style={styles.iconDot}
-              />
+              /> */}
+              <TouchableOpacity style={styles.iconDot}>
+                <Text>Block</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -164,6 +202,12 @@ export default function InforFriend({ navigation, route }) {
                 Img={Item.images}
                 idPost={Item._id}
                 idUser={Item.author._id}
+                idAccount={getInfor._id}
+                countLikes={Item.like}
+                videos={Item.videos}
+                cover_image={Item.author.cover_image}
+                avatar={Item.author.avatar}
+                username={Item.author.username}
                 countComments={Item.countComments}
                 page="home"
               />
@@ -252,7 +296,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     marginRight: 10,
-    width: (SCREEN_WEIGHT - 75) / 2,
+    width: (SCREEN_WEIGHT - 85) / 2,
   },
   textButtonVideo: {
     color: "#fff",
@@ -272,7 +316,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 5,
     paddingVertical: 8,
-    width: (SCREEN_WEIGHT - 75) / 2,
+    width: (SCREEN_WEIGHT - 85) / 2,
   },
   textEditProfile: {
     marginLeft: 5,

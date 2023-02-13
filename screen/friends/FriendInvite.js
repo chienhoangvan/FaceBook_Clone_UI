@@ -51,7 +51,7 @@ export default function FriendInvite({ route }) {
 
   useEffect(() => {
     getListFriendInvite();
-  }, [navigation]);
+  }, [listFriendInvite]);
 
   return (
     <Layout route={route.name}>
@@ -68,6 +68,11 @@ export default function FriendInvite({ route }) {
               style={styles.button}
               onPress={() => navigation.navigate("Friend")}>
               <Text style={styles.text}>Bạn bè</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("SentInvite")}>
+              <Text style={styles.text}>Lời mời đã gửi</Text>
             </TouchableOpacity>
           </View>
         </View>

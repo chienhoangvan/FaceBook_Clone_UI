@@ -1,90 +1,86 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  StatusBar,
+  Dimensions,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Friend } from "../../components/Messenger";
-import MesFr from "../../components/Messenger";
 
 export default function Messenger({ navigation }) {
-  const messengers = [
-    {
-      id: 1,
-      fullname: "Trinh Dat",
-      name: "Dat",
-      avatar: "https://reactnative.dev/img/tiny_logo.png",
-      mes: "OK!!!!",
-      send: 1,
-      online: 1,
-    },
-    {
-      id: 2,
-      fullname: "Pham Dinh Minh",
-      name: "Minh",
-      avatar:
-        "https://gamek.mediacdn.vn/2019/10/20/photo-1-1571521922264714072244.jpg",
-      mes: "I love You<3",
-      send: 0,
-      online: 1,
-    },
-    {
-      id: 4,
-      fullname: "Do Dang Phuong",
-      name: "Phuong",
-      avatar: "https://i.ytimg.com/vi/dkvaprtP6L8/maxresdefault.jpg",
-      mes: "Good luck!!",
-      send: 0,
-      online: 1,
-    },
-    {
-      id: 5,
-      fullname: "Ho Duc Han",
-      name: "Han",
-      avatar:
-        "https://cdna.artstation.com/p/assets/images/images/019/387/690/large/inward-vertical-city.jpg?1563272711",
-      mes: "Come on!!",
-      send: 1,
-      online: 1,
-    },
-    {
-      id: 6,
-      fullname: "Chien Hoang Van",
-      name: "Hoang",
-      avatar:
-        "https://www.ebtc.ie/wp-content/uploads/2017/10/bigstock-Autumn-Fall-scene-Beautiful-150998720.jpg",
-      mes: "NO!!!!",
-      send: 1,
-      online: 1,
-    },
-    {
-      id: 3,
-      fullname: "Vu Ba Luong",
-      name: "Luong",
-      avatar:
-        "https://s.ftcdn.net/v2013/pics/all/curated/RKyaEDwp8J7JKeZWQPuOVWvkUjGQfpCx_cover_580.jpg?r=1a0fc22192d0c808b8bb2b9bcfbf4a45b1793687",
-      mes: "See you again!!!!",
-      send: 1,
-      online: 1,
-    },
-  ];
-  const list1 = () => {
-    return messengers.map((element) => {
-      return (
-        <Friend key={element.id} avatar={element.avatar} name={element.name} />
-      );
-    });
+  const [friendInfor, setFriendInfor] = useState([]);
+  const [getInfor, setGetInfor] = useState({});
+  const [tokenn, setTokenn] = useState("");
+
+  const getListFriend = async () => {
+    const token = await AsyncStorage.getItem("id_token");
+    return fetch("https://severfacebook.up.railway.app/api/v1/friends/list", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "token " + token,
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          return (response = response.json());
+        } else {
+          alert("Dữ liệu thất bại");
+        }
+      })
+      .then((response) => {
+        if (response !== undefined) {
+          setFriendInfor(response.data.friends);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
-  const list2 = () => {
-    return messengers.map((element) => {
-      return (
-        <MesFr
-          key={element.id}
-          avatar={element.avatar}
-          fullname={element.fullname}
-          send={element.send}
-          mes={element.mes}
-        />
-      );
-    });
+
+  const showInfor = async () => {
+    const token = await AsyncStorage.getItem("id_token");
+    setTokenn(token);
+    return fetch("https://severfacebook.up.railway.app/api/v1/users/show", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "token " + token,
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          return (response = response.json());
+        } else {
+          alert("Load lỗi");
+        }
+      })
+      .then((response) => {
+        if (response !== undefined) {
+          setGetInfor(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
+  useEffect(() => {
+    getListFriend();
+    showInfor();
+  }, [navigation]);
+
   return (
     <View style={styles.contentHeader}>
       <View style={styles.header}>
@@ -112,25 +108,58 @@ export default function Messenger({ navigation }) {
           />
         </View>
       </View>
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        style={styles.listFr}>
-        {list1()}
-      </ScrollView>
-      <ScrollView>{list2()}</ScrollView>
+      <View style={styles.body}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          style={styles.listFr}>
+          {/* <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.listFrHorizol}>
+            {friendInfor.map((Item, index) => (
+              <View key={index}>
+                <Friend
+                  avatar={Item.avatar}
+                  username={Item.username}
+                  text="column"
+                />
+              </View>
+            ))}
+          </ScrollView> */}
+          {friendInfor.map((Item, index) => (
+            <View key={index}>
+              <Friend
+                avatar={Item.avatar}
+                username={Item.username}
+                text="row"
+                receiverId={Item._id}
+                senderId={getInfor._id}
+                id_token={tokenn}
+              />
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
+const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
+const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
 
 const styles = StyleSheet.create({
+  contentHeader: {
+    backgroundColor: "#fff",
+    height: SCREEN_HEIGHT + 100,
+    paddingTop: StatusBar.currentHeight,
+  },
   header: {
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
     marginBottom: 10,
-    marginTop: 30,
+    borderBottomColor: "#000",
+    borderBottomWidth: 0.5,
   },
   back: {
     flexDirection: "row",
@@ -139,9 +168,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   textHeader: {
-    fontSize: 25,
-    fontWeight: "600",
-    marginLeft: 10,
+    marginLeft: 5,
+    fontSize: 18,
   },
   group: {
     flexDirection: "row",
@@ -152,5 +180,10 @@ const styles = StyleSheet.create({
     borderRadius: 1000,
     marginRight: 10,
     padding: 5,
+  },
+
+  //body
+  listFrHorizol: {
+    marginBottom: 0,
   },
 });

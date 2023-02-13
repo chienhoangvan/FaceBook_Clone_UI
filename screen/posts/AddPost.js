@@ -20,13 +20,13 @@ import TwoPicture from "../../components/TwoPicture";
 import FourPicture from "../../components/FourPicture";
 
 import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
 
 function AddPost({ navigation, route }) {
-  const { avatar, username } = route.params;
+  const { avatar, username, textt } = route.params;
   const [vertical, setVertical] = useState(false);
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -39,6 +39,12 @@ function AddPost({ navigation, route }) {
   selectedImages.map((itemImage, index) => {
     images.push(itemImage.uri);
   });
+
+  useEffect(() => {
+    if (textt === "camera") {
+      setShowImagePicker((pre) => !pre);
+    }
+  }, []);
 
   const closeImagePicker = (assets) => {
     setSelectedImages([...assets]);
@@ -74,59 +80,58 @@ function AddPost({ navigation, route }) {
       console.log(e);
     }
   };
-  console.log(selectedVideo);
-
-  const Uploadvideo = async () => {
-    const fileName = "video-" + new Date().getTime();
-    const storage = getStorage();
-    const my_ref = ref(storage, `video/${fileName}.mp4`);
-    const video = await fetch(selectedVideo);
-    const bytes = await video.blob();
-    await uploadBytes(my_ref, bytes)
-      .then(async (res) => {
-        await getDownloadURL(my_ref)
-          .then((url) => {
-            setSelectedVideo(url);
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
-  };
 
   const handlePost = async () => {
-    // Uploadvideo();
+    setLoaing(true);
+    let urlVideo;
     let responseImage = [];
-    for (let i = 0; i < selectedImages.length; i++) {
-      const fileName = "img-" + new Date().getTime();
+    if (selectedVideo !== null) {
+      const fileName = "video-" + new Date().getTime();
       const storage = getStorage();
-      const my_ref = ref(storage, `images/${fileName}.jpg`);
-      const metadata = {
-        contentType: "image/jpeg",
-      };
-      const img = await fetch(selectedImages[i].uri);
-      const bytes = await img.blob();
-      await uploadBytes(my_ref, bytes, metadata)
+      const my_ref = ref(storage, `video/${fileName}.mp4`);
+      const video = await fetch(selectedVideo);
+      const bytes = await video.blob();
+      await uploadBytes(my_ref, bytes)
         .then(async (res) => {
-          if (res.metadata) {
-            await getDownloadURL(my_ref)
-              .then((url) => {
-                imageUrl = url + ".jpg";
-                responseImage.push(url);
-              })
-              .catch((error) => console.log(error));
-          } else {
-            console.log("UPLOAD FILE ERROR!");
-          }
+          await getDownloadURL(my_ref)
+            .then((url) => {
+              urlVideo = url;
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
+    } else {
+      for (let i = 0; i < selectedImages.length; i++) {
+        const fileName = "img-" + new Date().getTime();
+        const storage = getStorage();
+        const my_ref = ref(storage, `images/${fileName}.jpg`);
+        const metadata = {
+          contentType: "image/jpeg",
+        };
+        const img = await fetch(selectedImages[i].uri);
+        const bytes = await img.blob();
+        await uploadBytes(my_ref, bytes, metadata)
+          .then(async (res) => {
+            if (res.metadata) {
+              await getDownloadURL(my_ref)
+                .then((url) => {
+                  imageUrl = url + ".jpg";
+                  responseImage.push(url);
+                })
+                .catch((error) => console.log(error));
+            } else {
+              console.log("UPLOAD FILE ERROR!");
+            }
+          })
+          .catch((error) => console.log(error));
+      }
     }
 
-    setLoaing(true);
     const token = await AsyncStorage.getItem("id_token");
     const potion = {
       described: text,
       images: responseImage,
-      videos: selectedVideo,
+      videos: urlVideo,
     };
     return fetch("https://severfacebook.up.railway.app/api/v1/posts/create", {
       method: "POST",
@@ -194,8 +199,8 @@ function AddPost({ navigation, route }) {
               <View style={styles.infor}>
                 <Text style={styles.textInfor}>{username}</Text>
                 <TouchableOpacity style={styles.inforBottom}>
-                  <FontAwesome5 name="user-friends" size={16} color="#666" />
-                  <Text style={styles.textinforBottom}>Bạn bè</Text>
+                  <Fontisto name="earth" size={16} color="#666" />
+                  <Text style={styles.textinforBottom}>Công khai</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -268,9 +273,9 @@ function AddPost({ navigation, route }) {
                   style={styles.item}
                   onPress={() => handleVideoPick()}>
                   <Entypo
-                    name="emoji-happy"
+                    name="video-camera"
                     size={24}
-                    color="#F5C33B"
+                    color="red"
                     style={styles.icon}
                   />
                   <Text>Video</Text>
@@ -302,8 +307,8 @@ function AddPost({ navigation, route }) {
                   onPress={() => setShowImagePicker((pre) => !pre)}>
                   <Ionicons name="md-images" size={24} color="green" />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <Entypo name="emoji-happy" size={24} color="#F5C33B" />
+                <TouchableOpacity onPress={() => handleVideoPick()}>
+                  <Entypo name="video-camera" size={24} color="red" />
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <Entypo name="camera" size={24} color="#0091ff" />

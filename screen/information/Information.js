@@ -56,7 +56,7 @@ export default function Information({ navigation, route }) {
 
   useEffect(() => {
     showInfor();
-  }, [navigation]);
+  }, [getListPost]);
 
   const showListPost = async (iduser) => {
     const token = await AsyncStorage.getItem("id_token");
@@ -89,6 +89,12 @@ export default function Information({ navigation, route }) {
         console.error(error);
       });
   };
+  // {
+  //   getListPost.map((Item, index) => {
+  //     console.log(Item);
+  //   });
+  // }
+  // console.log(getListPost);
 
   return (
     <Layout route={route.name}>
@@ -152,8 +158,12 @@ export default function Information({ navigation, route }) {
                 idPost={Item._id}
                 idUser={getInfor._id}
                 countLikes={Item.like}
+                idAccount={getInfor._id}
                 countComments={Item.countComments}
-                liked={Item.isLike}
+                cover_image={Item.author.cover_image}
+                avatar={Item.author.avatar}
+                username={Item.author.username}
+                videos={Item.videos}
                 page="infor"
               />
             </View>

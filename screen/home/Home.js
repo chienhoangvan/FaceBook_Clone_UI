@@ -20,6 +20,7 @@ function Home({ navigation, route }) {
   const [getInfor, setGetInfor] = useState([]);
   const [getListPost, setGetListPost] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
 
   const showInfor = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -53,7 +54,10 @@ function Home({ navigation, route }) {
   useEffect(() => {
     showInfor();
     showListPost();
-  }, [getListPost]);
+    setTimeout(() => {
+      setCount(count + 1);
+    }, 5000);
+  }, [count]);
 
   const showListPost = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -76,6 +80,7 @@ function Home({ navigation, route }) {
       })
       .then((response) => {
         if (response !== undefined) {
+          // console.log(response.data);
           setGetListPost(response.data);
         }
       })
@@ -108,7 +113,18 @@ function Home({ navigation, route }) {
               <Text style={styles.textSearch}>Bạn đang nghĩ gì?</Text>
             </TouchableOpacity>
           </View>
-          <FontAwesome5 name="images" size={24} color="green" />
+          <FontAwesome5
+            name="images"
+            size={24}
+            color="green"
+            onPress={() =>
+              navigation.navigate("AddPost", {
+                avatar: getInfor.avatar,
+                username: getInfor.username,
+                textt: "camera",
+              })
+            }
+          />
         </View>
         {getListPost
           .map((Item, index) => (
@@ -118,11 +134,15 @@ function Home({ navigation, route }) {
                 textContent={Item.described}
                 Img={Item.images}
                 idPost={Item._id}
-                idUser={Item.author}
+                idUser={Item.author._id}
+                cover_image={Item.author.cover_image}
+                avatar={Item.author.avatar}
+                username={Item.author.username}
+                idAccount={getInfor._id}
                 countComments={Item.countComments}
                 countLikes={Item.like}
                 liked={Item.isLike}
-                // videos={Item.videos}
+                videos={Item.videos}
                 page="home"
               />
             </View>

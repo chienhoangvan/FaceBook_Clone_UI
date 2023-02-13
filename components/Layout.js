@@ -148,7 +148,7 @@ export default function Layout({ children, route }) {
 const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
 const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
 
-const marginy = SCREEN_HEIGHT > 750 ? 3.5 : 0;
+const marginy = SCREEN_HEIGHT > 800 ? 3.5 : SCREEN_HEIGHT > 750 ? 0.75 : 0;
 
 const styles = StyleSheet.create({
   container: {
@@ -179,11 +179,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   iconHeader: {
+    width: 31,
+    height: 31,
     alignItems: "center",
     backgroundColor: "#ccc",
     borderRadius: 1000,
     marginRight: 5,
     padding: 5,
+    justifyContent: "center",
   },
   body: {
     flexDirection: "row",

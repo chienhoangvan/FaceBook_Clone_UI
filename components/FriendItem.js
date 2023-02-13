@@ -126,6 +126,12 @@ export default function FriendItem({
     }
   };
 
+  const handRefure = () => {
+    if (text === "Chấp nhận") {
+      confirm(1);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.itemFriend}>
@@ -156,7 +162,9 @@ export default function FriendItem({
                 onPress={() => handlRequest()}>
                 <Text style={styles.textA}>{text}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonB}>
+              <TouchableOpacity
+                style={styles.buttonB}
+                onPress={() => handRefure()}>
                 <Text style={styles.textB}>Xóa</Text>
               </TouchableOpacity>
             </View>

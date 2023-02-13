@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,99 +8,54 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-const Circle1 = () => {
+
+export function Friend({
+  avatar,
+  username,
+  text,
+  receiverId,
+  senderId,
+  id_token,
+}) {
+  const navigation = useNavigation();
+
   return (
-    <View
-      style={{
-        width: 15,
-        height: 15,
-        borderRadius: 7.5,
-        backgroundColor: "#2f9a48",
-        borderWidth: 2,
-        borderColor: "#ffffff",
-        marginLeft: 50,
-        marginTop: 50,
-      }}
-    />
-  );
-};
-export function Friend(props) {
-  return (
-    <View style={styles.friend}>
-      <TouchableOpacity style={{ flex: 1 }}>
-        <Image style={styles.avt} source={{ uri: props.avatar }}></Image>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Chat", {
+            avatar: avatar,
+            username: username,
+            receiverId: receiverId,
+            senderId: senderId,
+            id_token: id_token,
+          })
+        }>
+        <Image style={styles.avatar} source={{ uri: avatar }} />
       </TouchableOpacity>
-      <Circle1></Circle1>
-      <Text style={styles.nameFr}>{props.name}</Text>
-    </View>
-  );
-}
-export default function MesFr(props) {
-  const send = (send, mes) => {
-    if (send) return "You: " + mes;
-    else return mes;
-  };
-  return (
-    <View>
-      <TouchableOpacity style={styles.friendMess}>
-        <Image style={styles.avt} source={{ uri: props.avatar }}></Image>
-        <View style={styles.user}>
-          <Text style={styles.name}>{props.fullname}</Text>
-          <Text style={styles.mes}>{send(props.send, props.mes)}</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.content}>
+        <Text style={styles.username}>{username}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    marginTop: 35,
-    marginLeft: 50,
-    fontSize: 28,
-    fontWeight: "700",
-  },
-  listFr: {
+  container: {
     flexDirection: "row",
-    marginTop: 10,
+    alignItems: "center",
+    marginBottom: 15,
   },
-  friend: {
-    marginLeft: 20,
-  },
-  avtfr: {
+  avatar: {
+    marginLeft: 15,
     width: 60,
     height: 60,
-    borderRadius: 100,
-    flex: 1,
+    borderRadius: 50,
   },
-  nameFr: {
-    textAlign: "center",
+  content: {
     marginLeft: 10,
   },
-  friendMess: {
-    marginTop: 20,
-    flexDirection: "row",
-    width: "100%",
-  },
-  avt: {
-    marginLeft: 10,
-    width: 60,
-    height: 60,
-    borderRadius: 100,
-    flex: 0,
-  },
-  user: {
-    marginLeft: 10,
-    flex: 1,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  mes: {
-    textAlign: "left",
-    marginTop: 8,
-    fontSize: 15,
-    opacity: 0.5,
+  username: {
+    fontSize: 16,
   },
 });

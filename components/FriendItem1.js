@@ -34,7 +34,7 @@ export default function Friend({
       .then((response) => {
         const statusCode = response.status;
         if (statusCode === 200) {
-          navigation.navigate("FriendInvite");
+          navigation.navigate("Home");
           alert("Hủy kết bạn thành công");
         } else {
           alert("Hủy kết bạn không thành công");
