@@ -162,13 +162,15 @@ export default function HomeItem({
           style={styles.ItemUser}
           onPress={() =>
             page === "home"
-              ? navigation.navigate("InforFriend", {
-                  avatar: avatar,
-                  idUser: idUser,
-                  username: username,
-                  cover_image: cover_image,
-                  text: "Bạn bè",
-                })
+              ? idUser === idAccount
+                ? navigation.navigate("Information")
+                : navigation.navigate("InforFriend", {
+                    avatar: avatar,
+                    idUser: idUser,
+                    username: username,
+                    cover_image: cover_image,
+                    text: "Bạn bè",
+                  })
               : ""
           }>
           <View style={styles.imageAvater}>
@@ -221,7 +223,12 @@ export default function HomeItem({
           Img.length === 0 ? (
             textContent.split(" ").length < 18 ? (
               <View style={styles.noImage}>
-                <Text style={styles.textNoImage}>{textContent}</Text>
+                <Text
+                  style={styles.textNoImage}
+                  numberOfLines={showMore ? 2 : 0}
+                  onPress={() => setShowMore(!showMore)}>
+                  {textContent}
+                </Text>
               </View>
             ) : (
               <View>

@@ -12,7 +12,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-
+import { RefreshControl } from 'react-native';
 import { FontAwesome5 } from "@expo/vector-icons";
 import HomeItem from "../../components/HomeItem";
 
@@ -21,7 +21,13 @@ function Home({ navigation, route }) {
   const [getListPost, setGetListPost] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
-
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1500);
+  }, [refreshing]);
   const showInfor = async () => {
     const token = await AsyncStorage.getItem("id_token");
     return fetch("https://severfacebook.up.railway.app/api/v1/users/show", {
@@ -91,7 +97,9 @@ function Home({ navigation, route }) {
 
   return (
     <Layout route={route.name}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} refreshControl={
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+  }>
         <View style={styles.infor}>
           <View style={styles.imageAvatar}>
             <Image
