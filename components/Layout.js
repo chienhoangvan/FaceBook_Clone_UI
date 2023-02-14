@@ -38,6 +38,10 @@ export default function Layout({ children, route }) {
               size={20}
               color="black"
               style={styles.iconHeader}
+              onPress={() => {
+                enableScreens(false);
+                navigation.navigate("Search");
+              }}
             />
 
             <FontAwesome5

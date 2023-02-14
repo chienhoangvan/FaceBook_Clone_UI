@@ -27,6 +27,7 @@ export default function InforFriend({ navigation, route }) {
   const { username, idUser, avatar, cover_image, text } = route.params;
   const [getInfor, setGetInfor] = useState({});
   const [getListPost, setGetListPost] = useState([]);
+  const [tokenn, setTokenn] = useState("");
 
   const showInfor = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -60,12 +61,13 @@ export default function InforFriend({ navigation, route }) {
   const blockFriend = async () => {
     const values = {
       user_id: idUser,
+      type: 1,
     };
     const token = await AsyncStorage.getItem("id_token");
     return fetch(
-      `https://severfacebook.up.railway.app/api/v1/users/set-block-user`,
+      `https://severfacebook.up.railway.app/api/v1/users/set-block-diary`,
       {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -84,7 +86,8 @@ export default function InforFriend({ navigation, route }) {
       })
       .then((response) => {
         if (response !== undefined) {
-          setGetInfor(response.data);
+          console.log(response);
+          alert(response.message);
         }
       })
       .catch((error) => {
@@ -94,6 +97,7 @@ export default function InforFriend({ navigation, route }) {
 
   useEffect(() => {
     showListPost();
+    showInfor();
   }, [navigation]);
 
   const showListPost = async () => {
@@ -120,6 +124,7 @@ export default function InforFriend({ navigation, route }) {
       })
       .then((response) => {
         if (response !== undefined) {
+          setTokenn(token);
           setGetListPost(response.data);
         }
       })
@@ -173,7 +178,17 @@ export default function InforFriend({ navigation, route }) {
               <TouchableOpacity style={styles.buttonConfirm}>
                 <Text style={styles.textButtonVideo}>{text}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonChat}>
+              <TouchableOpacity
+                style={styles.buttonChat}
+                onPress={() =>
+                  navigation.navigate("Chat", {
+                    avatar: avatar,
+                    username: username,
+                    receiverId: idUser,
+                    senderId: getInfor._id,
+                    id_token: tokenn,
+                  })
+                }>
                 <FontAwesome5
                   name="facebook-messenger"
                   size={16}
@@ -187,7 +202,9 @@ export default function InforFriend({ navigation, route }) {
                 color="black"
                 style={styles.iconDot}
               /> */}
-              <TouchableOpacity style={styles.iconDot}>
+              <TouchableOpacity
+                style={styles.iconDot}
+                onPress={() => blockFriend()}>
                 <Text>Block</Text>
               </TouchableOpacity>
             </View>

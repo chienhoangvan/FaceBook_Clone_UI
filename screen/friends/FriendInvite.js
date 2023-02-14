@@ -58,23 +58,30 @@ export default function FriendInvite({ route }) {
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.textHeader}>Bạn bè</Text>
-          <View style={styles.option}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("SuggestionFriend")}>
-              <Text style={styles.text}>Gợi ý</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Friend")}>
-              <Text style={styles.text}>Bạn bè</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("SentInvite")}>
-              <Text style={styles.text}>Lời mời đã gửi</Text>
-            </TouchableOpacity>
-          </View>
+          <ScrollView showsHorizontalScrollIndicator={true} horizontal={true}>
+            <View style={styles.option}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("SuggestionFriend")}>
+                <Text style={styles.text}>Gợi ý</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Friend")}>
+                <Text style={styles.text}>Bạn bè</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("SentInvite")}>
+                <Text style={styles.text}>Lời mời đã gửi</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Block")}>
+                <Text style={styles.text}>Người đã block</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </View>
         <View style={styles.body}>
           <View style={styles.invite}>
