@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import io from "socket.io-client";
+import io from "socket.io-client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -37,12 +37,15 @@ const SocketClient = ({ route }) => {
         content: text,
       },
     ]);
-    socket.emit("chatmessage", {
-      senderId: senderId,
-      receiverId: receiverId,
-      content: text,
-      token: id_token,
-    });
+    if (text === "") {
+    } else {
+      socket.emit("chatmessage", {
+        senderId: senderId,
+        receiverId: receiverId,
+        content: text,
+        token: id_token,
+      });
+    }
   };
 
   const getChat = async () => {

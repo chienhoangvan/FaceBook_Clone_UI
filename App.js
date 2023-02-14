@@ -21,7 +21,8 @@ import ShowInfor from "./screen/user/ShowInfor";
 import EditPost from "./screen/posts/EditPost";
 import InforFriend from "./screen/friends/InforFriend";
 import Chat from "./screen/messenger/Chat";
-import ChangePass from "./screen/menu/ChangePass";
+import Search from "./screen/search/Search";
+import Block from "./screen/friends/Block";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ export default function App() {
         screenOptions={{ headerShown: false, animation: "none" }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Messenger" component={Messenger} />
+        <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Friend" component={Friend} />
@@ -48,7 +50,7 @@ export default function App() {
         <Stack.Screen name="EditPost" component={EditPost} />
         <Stack.Screen name="InforFriend" component={InforFriend} />
         <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="ChangePass" component={ChangePass} />
+        <Stack.Screen name="Block" component={Block} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
