@@ -26,6 +26,7 @@ const SocketClient = ({ route }) => {
   const [saveMess, setSaveMess] = useState([]);
   const [getIdChat, setGetIdChat] = useState([]);
   const [count, setCount] = useState(0);
+  const scrollViewRef = React.useRef();
 
   const socket = io("https://facebookapp-production.up.railway.app");
 
@@ -125,8 +126,12 @@ const SocketClient = ({ route }) => {
           <Ionicons name="ios-videocam" size={24} color="black" />
         </View>
       </View>
-      <ScrollView
+      <ScrollView 
         inverted={true}
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          scrollViewRef.current.scrollToEnd({ animated: true })
+        }
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: "flex-end",
