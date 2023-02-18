@@ -23,6 +23,7 @@ import InforFriend from "./screen/friends/InforFriend";
 import Chat from "./screen/messenger/Chat";
 import Search from "./screen/search/Search";
 import Block from "./screen/friends/Block";
+import DetailPost from "./screen/posts/DetailPost";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -51,6 +52,7 @@ export default function App() {
         <Stack.Screen name="InforFriend" component={InforFriend} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Block" component={Block} />
+        <Stack.Screen name="DetailPost" component={DetailPost} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
