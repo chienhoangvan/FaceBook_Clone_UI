@@ -106,10 +106,7 @@ export default function CommentPost({
           }}>
           <View style={styles.modalView}>
             <View style={styles.header}>
-              <View style={styles.iconLike}>
-                <AntDesign name="like1" size={12} color="#fff" />
-              </View>
-              <Text style={styles.textLike}>Bạn, Linh và 8 người khác</Text>
+              <Text style={styles.textLike}>Tất cả bình luận</Text>
             </View>
             <View style={styles.body}>
               {getComment.map((Comment, index) => (
