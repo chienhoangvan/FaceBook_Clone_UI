@@ -136,8 +136,19 @@ export default function SentInvite({ route }) {
             onPress={() => navigation.goBack()}
           />
         </TouchableOpacity>
-        <Text style={styles.textHeader}>Những người bạn đã block</Text>
+        <Text style={styles.textHeader}>Chặn</Text>
       </View>
+      <View style={{  flexDirection: 'column', marginRight: 3 ,paddingVertical: 12,}}>
+                    <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Người bị chặn</Text>
+                            <Text style={{ fontSize: 14, color: '#808080', top: -2 }}>
+                                Một khi chặn ai đó, họ sẽ không xem được nội dung bạn tự đăng trên dòng thời gian của mình,
+                                gắn thẻ bạn, mời bạn tham gia sự kiện hoặc nhóm, bắt đầu cuộc trò chuyện với bạn hay thêm
+                                 bạn làm bạn bè. Điều này không bao gồm các ứng dụng, trò chơi, hay nhóm mà cả bạn và người
+                                  này cùng tham gia.
+                            </Text>
+                    </View>
+                </View>
       <ScrollView style={styles.body}>
         <View style={styles.listFriend}>
           <ScrollView showsHorizontalScrollIndicator={true}>
@@ -153,7 +164,7 @@ export default function SentInvite({ route }) {
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => cancelBlock(ItemBlock._id)}>
-                  <Text>Hủy</Text>
+                  <Text style = {{fontSize : 16}}>Bỏ chặn</Text>
                 </TouchableOpacity>
               </View>
             ))}
@@ -179,7 +190,8 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     marginLeft: 5,
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   //body
   body: {

@@ -14,7 +14,7 @@ import SentInvite from "./screen/friends/SentInvite";
 import SuggestionFriend from "./screen/friends/SuggestionFriend";
 import Notification from "./screen/notification/Notification";
 import Information from "./screen/information/Information";
-import Menu from "./screen/menu/Menu";
+import MenuScreen from "./screen/menu/MenuScreen";
 import OtpPhone from "./screen/otpPhone/OtpPhone";
 import AddPost from "./screen/posts/AddPost";
 import ShowInfor from "./screen/user/ShowInfor";
@@ -23,6 +23,10 @@ import InforFriend from "./screen/friends/InforFriend";
 import Chat from "./screen/messenger/Chat";
 import Search from "./screen/search/Search";
 import Block from "./screen/friends/Block";
+import AccountSetting from "./screen/menu/AccountSetting";
+import ChangePass from "./screen/menu/ChangePass";
+import PolicyScreen from "./screen/menu/PolicyScreen";
+import PersonalInfor from "./screen/menu/PersonalInfor";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -43,7 +47,7 @@ export default function App() {
         <Stack.Screen name="Layout" component={Layout} />
         <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="Information" component={Information} />
-        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Menu" component={MenuScreen} />
         <Stack.Screen name="OtpPhone" component={OtpPhone} />
         <Stack.Screen name="AddPost" component={AddPost} />
         <Stack.Screen name="ShowInfor" component={ShowInfor} />
@@ -51,6 +55,10 @@ export default function App() {
         <Stack.Screen name="InforFriend" component={InforFriend} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Block" component={Block} />
+        <Stack.Screen name="AccountSetting" component={AccountSetting} />
+        <Stack.Screen name="ChangePass" component={ChangePass} />
+        <Stack.Screen name="PolicyScreen" component={PolicyScreen} />
+        <Stack.Screen name="PersonalInfor" component={PersonalInfor} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
