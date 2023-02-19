@@ -3,20 +3,14 @@ import { StyleSheet,
     View,  
     SafeAreaView,
     TextInput,
-    TouchableOpacity,
-    Dimensions,
-    ScrollView } from "react-native";
+    TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Friend } from "../../components/Messenger";
+import { FontAwesome, AntDesign} from "@expo/vector-icons";
 import React, { useState } from "react";
+
+
 export default function ChangePass({ navigation, route }) {
 
-  const [selected, setSelected] = useState(route);
-
-  const [modalVisible, setModalVisible] = useState(false);
   const [currentPassword, onChangeCurrentPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [newPassword, onChangeNewPassword] = useState("");
@@ -93,7 +87,7 @@ export default function ChangePass({ navigation, route }) {
         {visible ? (
           <FontAwesome
             name="eye"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -101,7 +95,7 @@ export default function ChangePass({ navigation, route }) {
         ) : (
           <FontAwesome
             name="eye-slash"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -121,7 +115,7 @@ export default function ChangePass({ navigation, route }) {
         {visible ? (
           <FontAwesome
             name="eye"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -129,7 +123,7 @@ export default function ChangePass({ navigation, route }) {
         ) : (
           <FontAwesome
             name="eye-slash"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -149,7 +143,7 @@ export default function ChangePass({ navigation, route }) {
         {visible ? (
           <FontAwesome
             name="eye"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -157,7 +151,7 @@ export default function ChangePass({ navigation, route }) {
         ) : (
           <FontAwesome
             name="eye-slash"
-            size={24}
+            size={20}
             color="black"
             style={styles.iconEye}
             onPress={() => setVisible(!visible)}
@@ -199,35 +193,23 @@ const styles = StyleSheet.create({
                   paddingVertical: 10,
                   marginBottom: 10,
                   marginTop: 30,
-        },
-        contentHeader: {
-          flexDirection: "row",
-          marginVertical: 10,
-          marginHorizontal: 15,
-
-        },
-      back: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        marginLeft: 10,
-      },
+          },
       textHeader: {
-        fontSize: 25,
+        fontSize: 22,
         fontWeight: "600",
         marginLeft: 20,
       },
       inputForm: {
         justifyContent: "center",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        marginVertical: 40,
       },
       input: {
         height: 50,
-        fontSize: 20,
+        fontSize: 18,
         borderBottomWidth: 1,
-        marginBottom: 15,
-
+        marginBottom: 18,
       },
       inputPass: {
         position: "relative",
@@ -248,15 +230,15 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         alignItems: "center",
         borderRadius: 8,
-        width: "80%",
-        textAlign:"center"
+        width: "70%",
+        textAlign:"center",
       },
       button2: {
               backgroundColor: "#fff",
               paddingVertical: 15,
               alignItems: "center",
               borderRadius: 8,
-              width: "80%",
+              width: "70%",
               textAlign:"center",
               borderWidth: 0.5  ,
             },

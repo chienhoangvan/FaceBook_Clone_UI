@@ -7,21 +7,13 @@ import AntDesign  from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   Text,
-  Image,
   StyleSheet,
   View,
   SafeAreaView,
   StatusBar,
-  Dimensions,
   TouchableOpacity,
-
 } from "react-native";
 
-//import { AntDesign } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Octicons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 
 export default function AccountSetting({children,  navigation, route }) {
     const [getInfor, setGetInfor] = useState({});

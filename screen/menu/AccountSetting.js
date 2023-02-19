@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
-import { enableScreens } from "react-native-screens";
-import Icon from 'react-native-vector-icons/Ionicons';
 import {
   Text,
-  Image,
   StyleSheet,
   View,
   SafeAreaView,
   StatusBar,
-  Dimensions,
   TouchableOpacity,
-  Modal,
-  TextInput
-} from "react-native";
+ } from "react-native";
 
-import { AntDesign } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { Entypo, AntDesign, FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
 
 export default function AccountSetting({children,  navigation, route }) {
-//  const { getInfor } = route.params;
 
   return (
         <SafeAreaView style={styles.container}>
@@ -50,8 +38,7 @@ export default function AccountSetting({children,  navigation, route }) {
               <TouchableOpacity style={styles.item}
                        onPress={() => navigation.navigate('PersonalInfor')}
               >
-                      <Image style={{ width: 40, height: 40 }}
-                                                       source={require('./source/user_circle.png')} />
+                      <FontAwesome name='user-circle-o' size = {35} />
                       <View style={{ flexDirection: 'column', marginLeft: 10 }}>
                               <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Thông tin cá nhân</Text>
                               <Text style={{ fontSize: 15, color: '#808080', top: -2 }}>
@@ -70,11 +57,9 @@ export default function AccountSetting({children,  navigation, route }) {
                         </Text>
                 </View>
                 <TouchableOpacity style={styles.item}
-//                    onPress={() => {setModalVisible(true);}}
                     onPress={() => navigation.navigate('ChangePass')}
                 >
-                      <Image style={{ width: 40, height: 40 }}
-                                                       source={require('./source/icon_changepass.png')} />
+                      <MaterialCommunityIcons name='key-change' size = {35} />
                       <View style={{ flexDirection: 'column', marginLeft: 10 }}>
                               <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Đổi mật khẩu</Text>
                               <Text style={{ fontSize: 15, color: '#808080', top: -2 }}>
@@ -91,10 +76,9 @@ export default function AccountSetting({children,  navigation, route }) {
                       </Text>
               </View>
               <TouchableOpacity style={styles.item}
-//                    onPress={() => {setModalVisible(true);}}
                   onPress={() => navigation.navigate('Block')}
               >
-                   <Entypo name='block' size = {40} />
+                   <Entypo name='block' size = {35} />
                     <View style={{ flexDirection: 'column', marginLeft: 10 }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Chặn</Text>
                             <Text style={{ fontSize: 15, color: '#808080', top: -2 }}>
@@ -108,12 +92,6 @@ export default function AccountSetting({children,  navigation, route }) {
     </SafeAreaView>
   );
 }
-
-const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
-const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
-const SCREEN_WEIGHT = Math.round(Dimensions.get("window").width);
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -136,8 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-
-  //body
   content: {
     marginHorizontal: 20,
   },
@@ -147,77 +123,6 @@ const styles = StyleSheet.create({
           borderBottomWidth: 0.3,
           paddingHorizontal: 15,
    },
-  headerItem: {
-    marginVertical: 15,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  textHeaderItem: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  buttonEditItem: {},
-  editTextItem: {
-    fontSize: 18,
-    fontWeight: "400",
-    color: "#0066ff",
-  },
-  image: {
-    alignItems: "center",
-  },
-  avatar: {
-    height: 150,
-    width: 150,
-    marginBottom: 15,
-    borderRadius: 200,
-  },
-  coverAvatar: {
-    marginBottom: 15,
-    borderRadius: 8,
-    width: SCREEN_WIDTH - 40,
-    height: (4 * (SCREEN_WIDTH - 40)) / 7,
-  },
-  textDecription: {
-    fontSize: 16,
-    marginBottom: 15,
-  },
-  //chi tiet
-  group: {
-    flexDirection: "row",
-    marginBottom: 15,
-    alignItems: "center",
-  },
-  icon: {
-    width: 25,
-    marginRight: 10,
-  },
-  textInput: {
-    fontSize: 16,
-    marginLeft: 6,
-    width: SCREEN_WIDTH - 75,
-  },
-  picker: {
-    width: SCREEN_WIDTH - 75,
-    // borderBottomWidth: 1,
-    marginVertical: -5,
-  },
-  pickerItem: {
-    fontSize: 16,
-  },
-
-  buttonSave: {
-    width: "100%",
-    backgroundColor: "#0066ff",
-    borderRadius: 5,
-    marginTop: 15,
-    marginBottom: 15,
-  },
-  textSave: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-    paddingVertical: 5,
-  },
 });
 
 

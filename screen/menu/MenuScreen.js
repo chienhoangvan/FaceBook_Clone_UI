@@ -11,8 +11,7 @@ import {
     ScrollView,
     BackHandler
 } from 'react-native';
-import { connect } from 'react-redux';
-import { useDispatch, useSelector } from "react-redux";
+
 
 import { MaterialIcons, Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
 
@@ -20,12 +19,6 @@ function MenuScreen({ navigation , route}) {
 
     const [getInfor, setGetInfor] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [visible, setVisible] = useState(false);
-    const [currentPassword, onChangeCurrentPassword] = useState("");
-    const [newPassword, onChangeNewPassword] = useState("");
-    const [againNewPassword, onChangeAgainNewPassword] = useState("");
-
     const [isShowHelp, setIsShowHelp] = useState(false);
     const [isShowSetting, setIsShowSetting] = useState(false);
 
