@@ -41,8 +41,6 @@ export default function Search({ navigation }) {
         const statusCode = response.status;
         if (statusCode === 200) {
           return (response = response.json());
-        } else {
-          alert("Dữ liệu thất bại");
         }
       })
       .then((response) => {
