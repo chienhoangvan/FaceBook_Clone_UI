@@ -27,12 +27,12 @@ export default function Layout({ children, route }) {
         <View style={styles.header}>
           <Text style={styles.textHeader}>facebook</Text>
           <View style={styles.group}>
-            <AntDesign
+            {/* <AntDesign
               name="plus"
               size={20}
               color="black"
               style={styles.iconHeader}
-            />
+            /> */}
             <Feather
               name="search"
               size={20}

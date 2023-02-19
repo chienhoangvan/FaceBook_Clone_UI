@@ -26,6 +26,7 @@ const SocketClient = ({ route }) => {
   const [saveMess, setSaveMess] = useState([]);
   const [getIdChat, setGetIdChat] = useState([]);
   const [count, setCount] = useState(0);
+  const scrollViewRef = React.useRef();
 
   const socket = io("https://facebookapp-production.up.railway.app");
 
@@ -125,14 +126,28 @@ const SocketClient = ({ route }) => {
           <Ionicons name="ios-videocam" size={24} color="black" />
         </View>
       </View>
-      <ScrollView
+      <ScrollView 
         inverted={true}
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          scrollViewRef.current.scrollToEnd({ animated: true })
+        }
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: "flex-end",
           marginBottom: 0,
         }}>
         <View style={styles.body}>
+         <View style={styles.chatHeader}>
+                  <Image
+                    style={styles.avatarChatHeader}
+                      source={{
+                        uri: avatar,
+                      }}
+                  />
+                <Text style={styles.textHeader}>{username}</Text>
+                <Text style={styles.textContentRecied}>{"You're friends on Facebook"}</Text>
+         </View>
           {saveMess.map((ItemMess, index) => (
             <View style={styles.itemMess} key={index}>
               {ItemMess.senderId === senderId ? (
@@ -201,9 +216,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  chatHeader: {
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: 50,
+    marginTop: 50,
+  },
+  avatarChatHeader: {
+   alignItems: "center",
+   width: 90,
+   height: 90,
+   borderRadius: 90,
+   marginHorizontal: 10,
+  },
   avatar: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 50,
     marginHorizontal: 10,
   },
@@ -220,7 +248,7 @@ const styles = StyleSheet.create({
   },
   //body
   body: {
-    // height: SCREEN_HEIGHT,
+//    minHeight: SCREEN_HEIGHT,
     flexGrow: 1,
     justifyContent: "flex-end",
     paddingBottom: 70,
@@ -231,7 +259,7 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "#0084FF",
     alignSelf: "flex-end",
-    borderRadius: 8,
+    borderRadius: 15,
     marginBottom: 2,
     marginHorizontal: 10,
   },
@@ -240,7 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E4E6EB",
     alignSelf: "flex-start",
     paddingVertical: 6,
-    borderRadius: 8,
+    borderRadius: 15,
     marginLeft: 5,
     marginTop: 1,
   },

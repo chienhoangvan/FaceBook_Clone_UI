@@ -27,6 +27,7 @@ import AccountSetting from "./screen/menu/AccountSetting";
 import ChangePass from "./screen/menu/ChangePass";
 import PolicyScreen from "./screen/menu/PolicyScreen";
 import PersonalInfor from "./screen/menu/PersonalInfor";
+import DetailPost from "./screen/posts/DetailPost";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -59,6 +60,7 @@ export default function App() {
         <Stack.Screen name="ChangePass" component={ChangePass} />
         <Stack.Screen name="PolicyScreen" component={PolicyScreen} />
         <Stack.Screen name="PersonalInfor" component={PersonalInfor} />
+        <Stack.Screen name="DetailPost" component={DetailPost} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

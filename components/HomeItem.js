@@ -165,12 +165,12 @@ export default function HomeItem({
               ? idUser === idAccount
                 ? navigation.navigate("Information")
                 : navigation.navigate("InforFriend", {
-                    avatar: avatar,
-                    idUser: idUser,
-                    username: username,
-                    cover_image: cover_image,
-                    text: "Bạn bè",
-                  })
+                  avatar: avatar,
+                  idUser: idUser,
+                  username: username,
+                  cover_image: cover_image,
+                  text: "Bạn bè",
+                })
               : ""
           }>
           <View style={styles.imageAvater}>
@@ -217,49 +217,35 @@ export default function HomeItem({
           </View>
         )}
       </View>
-
-      <View style={styles.content}>
-        {videos === null || videos === [] || videos.length === 0 ? (
-          Img.length === 0 ? (
-            textContent.split(" ").length < 18 ? (
-              <View style={styles.noImage}>
-                <Text
-                  style={styles.textNoImage}
-                  numberOfLines={showMore ? 2 : 0}
-                  onPress={() => setShowMore(!showMore)}>
-                  {textContent}
-                </Text>
-              </View>
-            ) : (
-              <View>
-                <Text
-                  style={styles.textContent}
-                  numberOfLines={showMore ? 2 : 0}
-                  onPress={() => setShowMore(!showMore)}>
-                  {textContent}
-                </Text>
-              </View>
-            )
-          ) : (
-            <View>
-              {textContent === "" ? (
-                <View>
-                  {Img.length === 3 ? (
-                    <ThreePicture selectedImages={Img} />
-                  ) : Img.length === 2 ? (
-                    <TwoPicture selectedImages={Img} />
-                  ) : Img.length === 4 ? (
-                    <FourPicture selectedImages={Img} />
-                  ) : Img.length === 1 ? (
-                    <Image
-                      source={{
-                        uri: Img[0],
-                      }}
-                      style={styles.picture}
-                    />
-                  ) : (
-                    ""
-                  )}
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("DetailPost", {
+            time: time,
+            textContent: textContent,
+            Img: Img,
+            idPost: idPost,
+            idUser: idUser,
+            cover_image: cover_image,
+            avatar: avatar,
+            username: username,
+            countComments: countComments,
+            countLikes: countLikes,
+            idAccount: idAccount,
+            videos: videos,
+            page: page,
+          })
+        }>
+        <View style={styles.content}>
+          {videos === null || videos === [] || videos.length === 0 ? (
+            Img.length === 0 ? (
+              textContent.split(" ").length < 18 ? (
+                <View style={styles.noImage}>
+                  <Text
+                    style={styles.textNoImage}
+                    numberOfLines={showMore ? 2 : 0}
+                    onPress={() => setShowMore(!showMore)}>
+                    {textContent}
+                  </Text>
                 </View>
               ) : (
                 <View>
@@ -269,6 +255,11 @@ export default function HomeItem({
                     onPress={() => setShowMore(!showMore)}>
                     {textContent}
                   </Text>
+                </View>
+              )
+            ) : (
+              <View>
+                {textContent === "" ? (
                   <View>
                     {Img.length === 3 ? (
                       <ThreePicture selectedImages={Img} />
@@ -287,37 +278,65 @@ export default function HomeItem({
                       ""
                     )}
                   </View>
-                </View>
-              )}
+                ) : (
+                  <View>
+                    <Text
+                      style={styles.textContent}
+                      numberOfLines={showMore ? 2 : 0}
+                      onPress={() => setShowMore(!showMore)}>
+                      {textContent}
+                    </Text>
+                    <View>
+                      {Img.length === 3 ? (
+                        <ThreePicture selectedImages={Img} />
+                      ) : Img.length === 2 ? (
+                        <TwoPicture selectedImages={Img} />
+                      ) : Img.length === 4 ? (
+                        <FourPicture selectedImages={Img} />
+                      ) : Img.length === 1 ? (
+                        <Image
+                          source={{
+                            uri: Img[0],
+                          }}
+                          style={styles.picture}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </View>
+                  </View>
+                )}
+              </View>
+            )
+          ) : (
+            <View>
+              <Text
+                style={styles.textContent}
+                numberOfLines={showMore ? 2 : 0}
+                onPress={() => setShowMore(!showMore)}>
+                {textContent}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setShouldPlay(!shouldPlay);
+                }}>
+                <Video
+                  source={{
+                    uri: videos[0],
+                  }}
+                  rate={1.0}
+                  volume={1.0}
+                  isMuted={false}
+                  shouldPlay={shouldPlay}
+                  isLooping={true}
+                  style={styles.video}
+                />
+              </TouchableOpacity>
             </View>
-          )
-        ) : (
-          <View>
-            <Text
-              style={styles.textContent}
-              numberOfLines={showMore ? 2 : 0}
-              onPress={() => setShowMore(!showMore)}>
-              {textContent}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                setShouldPlay(!shouldPlay);
-              }}>
-              <Video
-                source={{
-                  uri: videos[0],
-                }}
-                rate={1.0}
-                volume={1.0}
-                isMuted={false}
-                shouldPlay={shouldPlay}
-                isLooping={true}
-                style={styles.video}
-              />
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
+          )}
+        </View>
+      </TouchableOpacity>
+
       <View style={styles.footer}>
         <View style={styles.headerFooter}>
           <View style={styles.countLike}>
