@@ -153,7 +153,7 @@ export default function SentInvite({ route }) {
         <View style={styles.listFriend}>
           <ScrollView showsHorizontalScrollIndicator={true}>
             {userGetInfor.map((ItemBlock, index) => (
-              <View style={styles.body2}>
+              <View style={styles.body2} key={index}>
                 <TouchableOpacity style={styles.content}>
                   <Image
                     source={{ uri: ItemBlock.avatar }}
