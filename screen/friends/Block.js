@@ -51,6 +51,7 @@ export default function SentInvite({ route }) {
         console.error(error);
       });
   };
+
   const userShowInfor = async (idUser) => {
     const token = await AsyncStorage.getItem("id_token");
     return fetch(
@@ -109,6 +110,7 @@ export default function SentInvite({ route }) {
       .then((response) => {
         const statusCode = response.status;
         if (statusCode === 200) {
+          removeUser(idUserBlock);
           return (response = response.json());
         } else {
           alert("Load lỗi");
@@ -124,6 +126,10 @@ export default function SentInvite({ route }) {
         console.error(error);
       });
   };
+
+  const removeUser = (id) => {
+        setUserGetInfor(userGetInfor.filter((item) => item._id !== id));
+    };
 
   return (
     <View style={styles.container}>
@@ -163,7 +169,10 @@ export default function SentInvite({ route }) {
                     <Text style={styles.textFr}>{5} bạn chung</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => cancelBlock(ItemBlock._id)}>
+                <TouchableOpacity onPress={() => {
+                          cancelBlock(ItemBlock._id);
+//                        removeUser(ItemBlock._id);
+                        }}>
                   <Text style = {{fontSize : 16}}>Bỏ chặn</Text>
                 </TouchableOpacity>
               </View>
