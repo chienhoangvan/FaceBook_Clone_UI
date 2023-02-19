@@ -18,12 +18,14 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import Dialog, { DialogFooter, DialogButton, DialogContent } from 'react-native-popup-dialog';
 
 const SocketClient = ({ route }) => {
   const navigation = useNavigation();
   const { avatar, username, receiverId, senderId, id_token } = route.params;
   const [text, onChangeText] = useState("");
   const [saveMess, setSaveMess] = useState([]);
+  const [recallMess, setRecallMess] = useState([]);
   const [getIdChat, setGetIdChat] = useState([]);
   const [count, setCount] = useState(0);
   const scrollViewRef = React.useRef();
@@ -48,7 +50,6 @@ const SocketClient = ({ route }) => {
       });
     }
   };
-
   const getChat = async () => {
     const token = await AsyncStorage.getItem("id_token");
     return fetch(
@@ -126,7 +127,7 @@ const SocketClient = ({ route }) => {
           <Ionicons name="ios-videocam" size={24} color="black" />
         </View>
       </View>
-      <ScrollView 
+      <ScrollView
         inverted={true}
         ref={scrollViewRef}
         onContentSizeChange={() =>
@@ -138,20 +139,42 @@ const SocketClient = ({ route }) => {
           marginBottom: 0,
         }}>
         <View style={styles.body}>
-         <View style={styles.chatHeader}>
-                  <Image
-                    style={styles.avatarChatHeader}
-                      source={{
-                        uri: avatar,
-                      }}
-                  />
-                <Text style={styles.textHeader}>{username}</Text>
-                <Text style={styles.textContentRecied}>{"You're friends on Facebook"}</Text>
-         </View>
+          <View style={styles.chatHeader}>
+            <Image
+              style={styles.avatarChatHeader}
+              source={{
+                uri: avatar,
+              }}
+            />
+            <Text style={styles.textHeader}>{username}</Text>
+            <Text style={styles.textContentRecied}>{"You're friends on Facebook"}</Text>
+          </View>
           {saveMess.map((ItemMess, index) => (
             <View style={styles.itemMess} key={index}>
               {ItemMess.senderId === senderId ? (
                 <View style={styles.contentSend}>
+                  {/* <Dialog
+                    visible={this.state.visible}
+                    onTouchOutside={() => {
+                      this.setState({ visible: false });
+                    }}
+                    footer={
+                      <DialogFooter>
+                        <DialogButton
+                          text="CANCEL"
+                          onPress={() => { }}
+                        />
+                        <DialogButton
+                          text="OK"
+                          onPress={() => { }}
+                        />
+                      </DialogFooter>
+                    }
+                  >
+                    <DialogContent>
+                      {"Xoá tin nhắn"}
+                    </DialogContent>
+                  </Dialog> */}
                   <Text style={styles.textContent}>{ItemMess.content}</Text>
                 </View>
               ) : (
@@ -223,11 +246,11 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   avatarChatHeader: {
-   alignItems: "center",
-   width: 90,
-   height: 90,
-   borderRadius: 90,
-   marginHorizontal: 10,
+    alignItems: "center",
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    marginHorizontal: 10,
   },
   avatar: {
     width: 50,
@@ -248,7 +271,7 @@ const styles = StyleSheet.create({
   },
   //body
   body: {
-//    minHeight: SCREEN_HEIGHT,
+    //    minHeight: SCREEN_HEIGHT,
     flexGrow: 1,
     justifyContent: "flex-end",
     paddingBottom: 70,
@@ -262,6 +285,20 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 2,
     marginHorizontal: 10,
+  },
+  itemSend: {
+    flexDirection: "row",
+    alignSelf: "flex-end",
+  },
+  editSend: {
+    alignSelf: "flex-end",
+    width: 20,
+    paddingRight: 0,
+    // padding: 5,
+    borderRadius: 5,
+    marginBottom: 2,
+    marginHorizontal: 10,
+    backgroundColor: "#e4e6eb",
   },
   contentRecied: {
     paddingHorizontal: 7,

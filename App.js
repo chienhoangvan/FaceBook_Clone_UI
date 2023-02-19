@@ -21,6 +21,7 @@ import ShowInfor from "./screen/user/ShowInfor";
 import EditPost from "./screen/posts/EditPost";
 import InforFriend from "./screen/friends/InforFriend";
 import Chat from "./screen/messenger/Chat";
+import DeleteChat from "./screen/messenger/DeleteChat";
 import Search from "./screen/search/Search";
 import Block from "./screen/friends/Block";
 
@@ -50,6 +51,7 @@ export default function App() {
         <Stack.Screen name="EditPost" component={EditPost} />
         <Stack.Screen name="InforFriend" component={InforFriend} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="DeleteChat" component={DeleteChat} />
         <Stack.Screen name="Block" component={Block} />
       </Stack.Navigator>
       <StatusBar style="auto" />

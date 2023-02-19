@@ -16,7 +16,36 @@ export default function Messenger({ navigation }) {
   const [friendInfor, setFriendInfor] = useState([]);
   const [getInfor, setGetInfor] = useState({});
   const [tokenn, setTokenn] = useState("");
+  const [listChat, setListChat] = useState([]);
 
+  const getListChat = async () => {
+    const token = await AsyncStorage.getItem("id_token");
+    return fetch("https://severfacebook.up.railway.app/api/v1/chats/list", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: "token " + token,
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          return (response = response.json());
+        } else {
+          alert("Dữ liệu thất bại");
+        }
+      })
+      .then((response) => {
+        if (response !== undefined) {
+          setListChat(response.data.chats);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const getListFriend = async () => {
     const token = await AsyncStorage.getItem("id_token");
     return fetch("https://severfacebook.up.railway.app/api/v1/friends/list", {
@@ -112,20 +141,6 @@ export default function Messenger({ navigation }) {
         <ScrollView
           showsHorizontalScrollIndicator={false}
           style={styles.listFr}>
-          {/* <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.listFrHorizol}>
-            {friendInfor.map((Item, index) => (
-              <View key={index}>
-                <Friend
-                  avatar={Item.avatar}
-                  username={Item.username}
-                  text="column"
-                />
-              </View>
-            ))}
-          </ScrollView> */}
           {friendInfor.map((Item, index) => (
             <View key={index}>
               <Friend

@@ -29,6 +29,12 @@ export function Friend({
             receiverId: receiverId,
             senderId: senderId,
             id_token: id_token,
+            chatId: chatId,
+          })
+        }
+        onLongPress={() =>
+          navigation.navigate("DeleteChat", {
+            chatId: chatId,
           })
         }>
         <Image style={styles.avatar} source={{ uri: avatar }} />
