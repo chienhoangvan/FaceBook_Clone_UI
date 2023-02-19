@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import { useDispatch, useSelector } from "react-redux";
 
-import { MaterialIcons, Feather, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 function MenuScreen({ navigation , route}) {
 
@@ -177,7 +177,21 @@ function MenuScreen({ navigation , route}) {
                     </TouchableOpacity>
                     {
                         isShowHelp && <>
-                            <TouchableOpacity onPress={() => navigation.navigate('PolicyScreen')}
+                            <TouchableOpacity
+                                    style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                                    <Ionicons name='ios-help-buoy' size = {30} />
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Trung tâm trợ giúp</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                    style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                                    <MaterialIcons name='report-problem' size = {30} />
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Báo cáo sự cố</Text>
+                                </View>
+                            </TouchableOpacity>
+                                <TouchableOpacity onPress={() => navigation.navigate('PolicyScreen')}
                                     style={{ ...styles.item, justifyContent: 'flex-start' }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
                                     <Image style={{ width: 30, height: 30 }}
