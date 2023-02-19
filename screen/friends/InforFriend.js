@@ -28,6 +28,9 @@ export default function InforFriend({ navigation, route }) {
   const [getInfor, setGetInfor] = useState({});
   const [getListPost, setGetListPost] = useState([]);
   const [tokenn, setTokenn] = useState("");
+  const [isBlock, setIsBlock] = useState(false)
+
+
 
   const showInfor = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -51,12 +54,16 @@ export default function InforFriend({ navigation, route }) {
       .then((response) => {
         if (response !== undefined) {
           setGetInfor(response.data);
+          if ( response.data.blocked_diary.includes(idUser)) {
+               setIsBlock(true)
+           }
         }
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
 
   const blockFriend = async () => {
     const values = {
@@ -79,6 +86,7 @@ export default function InforFriend({ navigation, route }) {
       .then((response) => {
         const statusCode = response.status;
         if (statusCode === 200) {
+            setIsBlock(true);
           return (response = response.json());
         } else {
           alert("Load lỗi");
@@ -98,7 +106,7 @@ export default function InforFriend({ navigation, route }) {
   useEffect(() => {
     showListPost();
     showInfor();
-  }, [navigation]);
+  }, [navigation, isBlock]);
 
   const showListPost = async () => {
     const token = await AsyncStorage.getItem("id_token");
@@ -196,17 +204,24 @@ export default function InforFriend({ navigation, route }) {
                 />
                 <Text style={styles.textEditProfile}>Nhắn tin</Text>
               </TouchableOpacity>
-              {/* <MaterialCommunityIcons
-                name="dots-horizontal"
-                size={24}
-                color="black"
-                style={styles.iconDot}
-              /> */}
+              {
+              !isBlock && <>
               <TouchableOpacity
                 style={styles.iconDot}
                 onPress={() => blockFriend()}>
-                <Text>Block</Text>
+                    <Text>Block</Text>
               </TouchableOpacity>
+              </>
+               }
+                {
+                isBlock && <>
+                   <TouchableOpacity
+                       style={styles.buttonBlocked}>
+                           <Text style = {{color : "#FFFFFF"}}>Blocked</Text>
+                   </TouchableOpacity>
+                </>
+                }
+
             </View>
           </View>
         </View>
@@ -313,7 +328,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     marginRight: 10,
-    width: (SCREEN_WEIGHT - 85) / 2,
+    width: (SCREEN_WEIGHT - 100) / 2,
   },
   textButtonVideo: {
     color: "#fff",
@@ -333,7 +348,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 5,
     paddingVertical: 8,
-    width: (SCREEN_WEIGHT - 85) / 2,
+    width: (SCREEN_WEIGHT - 100) / 2,
   },
   textEditProfile: {
     marginLeft: 5,
@@ -345,7 +360,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRadius: 5,
     backgroundColor: "#ccc",
+    width : 65,
+    alignItems : 'center'
   },
+  buttonBlocked: {
+      paddingVertical: 8,
+      paddingHorizontal: 5,
+      borderRadius: 5,
+      backgroundColor: "#CC0000",
+      width : 65,
+      alignItems : 'center'
+    },
 
   //post
   body: {

@@ -47,6 +47,7 @@ export default function Information({ navigation, route }) {
         if (response !== undefined) {
           showListPost(response.data._id);
           setGetInfor(response.data);
+
         }
       })
       .catch((error) => {
