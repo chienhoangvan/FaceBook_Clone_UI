@@ -9,9 +9,7 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-
 import { AntDesign, Feather, Octicons } from "@expo/vector-icons";
-
 
 export default function AccountSetting({children,  navigation, route }) {
 
