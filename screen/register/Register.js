@@ -41,11 +41,6 @@ export default function Register({ navigation, route }) {
   });
 
   const handleRegister = async (values) => {
-    const option = {
-      username: values.username + "" + values.lastname,
-      phonenumber: phonenumber,
-      password: values.password,
-    };
     // var token = await AsyncStorage.getItem("id_token");
     return fetch("https://severfacebook.up.railway.app/api/v1/users/register", {
       method: "POST",
@@ -54,7 +49,7 @@ export default function Register({ navigation, route }) {
         "Content-Type": "application/json",
         // authorization: "token " + token,
       },
-      body: JSON.stringify(option),
+      body: JSON.stringify(values),
     })
       .then((response) => {
         console.log(values);
