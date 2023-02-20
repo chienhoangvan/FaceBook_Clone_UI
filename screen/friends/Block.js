@@ -166,7 +166,7 @@ export default function SentInvite({ route }) {
                     style={styles.image}></Image>
                   <View style={styles.user}>
                     <Text style={styles.textName}>{ItemBlock.username}</Text>
-                    <Text style={styles.textFr}>{5} bạn chung</Text>
+                    <Text style={styles.textFr}>{1} bạn chung</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
