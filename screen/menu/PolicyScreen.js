@@ -72,6 +72,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000",
     borderBottomWidth: 0.5,
   },
+  contentHeader: {
+    flexDirection: "row",
+    marginVertical: 10,
+    marginHorizontal: 15,
+
+  },
   textHeader: {
     marginLeft: 10,
     fontSize: 20,
