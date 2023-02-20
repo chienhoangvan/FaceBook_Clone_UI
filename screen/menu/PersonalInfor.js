@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 
-export default function AccountSetting({children,  navigation, route }) {
+export default function AccountSetting({  navigation }) {
     const [getInfor, setGetInfor] = useState({});
 
     const showInfor = async () => {
@@ -116,7 +116,7 @@ export default function AccountSetting({children,  navigation, route }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.contentBody}>{children}</View>
+      {/* <View style={styles.contentBody}>{children}</View> */}
     </SafeAreaView>
   );
 }

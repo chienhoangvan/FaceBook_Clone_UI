@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { AntDesign, Feather, Octicons } from "@expo/vector-icons";
 
-export default function AccountSetting({children,  navigation}) {
+export default function AccountSetting({ navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,7 +57,7 @@ export default function AccountSetting({children,  navigation}) {
                   <Text style={{ fontSize: 16, fontWeight: 'bold' , }}>Tài nguyên khác</Text>
           </View>
       </TouchableOpacity>
-      <View style={styles.contentBody}>{children}</View>
+      {/* <View style={styles.contentBody}>{children}</View> */}
     </SafeAreaView>
   );
 }

@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from "react";
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import {
   Text,
   StyleSheet,
@@ -11,7 +9,7 @@ import {
 
 import { Entypo, AntDesign, FontAwesome, MaterialCommunityIcons} from "@expo/vector-icons";
 
-export default function AccountSetting({children,  navigation, route }) {
+export default function AccountSetting({children,  navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>

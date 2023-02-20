@@ -1,7 +1,6 @@
 import { StyleSheet,
     Text, 
     View,  
-    SafeAreaView,
     TextInput,
     TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -9,7 +8,7 @@ import { FontAwesome, AntDesign} from "@expo/vector-icons";
 import React, { useState } from "react";
 
 
-export default function ChangePass({ navigation, route }) {
+export default function ChangePass({ navigation}) {
 
   const [currentPassword, onChangeCurrentPassword] = useState("");
   const [visible, setVisible] = useState(false);
