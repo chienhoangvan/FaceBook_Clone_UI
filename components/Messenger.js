@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
 
@@ -21,7 +22,7 @@ export function Friend({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      <TouchableOpacity 
         onPress={() =>
           navigation.navigate("Chat", {
             avatar: avatar,
@@ -31,20 +32,28 @@ export function Friend({
             id_token: id_token,
           })
         }>
-        <Image style={styles.avatar} source={{ uri: avatar }} />
+        <View style={styles.group}>
+          <Image style={styles.avatar} source={{ uri: avatar }} />
+          <View style={styles.content}>
+            <Text style={styles.username}>{username}</Text>
+          </View>
+        </View>
       </TouchableOpacity>
-      <View style={styles.content}>
-        <Text style={styles.username}>{username}</Text>
-      </View>
     </View>
   );
 }
 
+const SCREEN_WIDTH = Math.round(Dimensions.get("window").width);
+const SCREEN_HEIGHT = Math.round(Dimensions.get("window").height);
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 15,
+  },
+  group: {
+    width: SCREEN_WIDTH,
+    flexDirection: "row",
   },
   avatar: {
     marginLeft: 15,
@@ -53,9 +62,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   content: {
+    marginTop: 20,
     marginLeft: 10,
   },
   username: {
     fontSize: 16,
   },
+
 });
