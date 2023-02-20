@@ -27,6 +27,7 @@ const SocketClient = ({ route }) => {
   const [getIdChat, setGetIdChat] = useState([]);
   const [count, setCount] = useState(0);
   const scrollViewRef = React.useRef();
+  var chatId = null;
 
   const socket = io("https://facebookapp-production.up.railway.app");
 
@@ -98,6 +99,45 @@ const SocketClient = ({ route }) => {
     });
   }, []);
 
+  const deleteChat = async (chatId) => {
+    if (chatId == null) {
+      alert("Xoá đoạn chat thành công");
+      navigation.goBack()
+    } else {
+      const token = await AsyncStorage.getItem("id_token");
+      return fetch(
+        `https://severfacebook.up.railway.app/api/v1/chats/deleteChat/${chatId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: "token " + token,
+          },
+          body: JSON.stringify(),
+        }
+      )
+        .then((response) => {
+          const statusCode = response.status;
+          if (statusCode === 200) {
+            return (response = response.json());
+          } else {
+            alert("Xoá đoạn chat thất bại");
+          }
+        })
+        .then((response) => {
+          if (response !== undefined) {
+            alert("Xoá đoạn chat thành công");
+            navigation.goBack()
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -124,9 +164,18 @@ const SocketClient = ({ route }) => {
             style={styles.iconPhone}
           />
           <Ionicons name="ios-videocam" size={24} color="black" />
+          <Ionicons
+            name="trash"
+            size={24}
+            color="black"
+            style={styles.delChat}
+            onPress={() => {
+              deleteChat(saveMess.length != 0 ? (saveMess.shift().chatId) : null);
+            }}
+          />
         </View>
       </View>
-      <ScrollView 
+      <ScrollView
         inverted={true}
         ref={scrollViewRef}
         onContentSizeChange={() =>
@@ -138,16 +187,16 @@ const SocketClient = ({ route }) => {
           marginBottom: 0,
         }}>
         <View style={styles.body}>
-         <View style={styles.chatHeader}>
-                  <Image
-                    style={styles.avatarChatHeader}
-                      source={{
-                        uri: avatar,
-                      }}
-                  />
-                <Text style={styles.textHeader}>{username}</Text>
-                <Text style={styles.textContentRecied}>{"You're friends on Facebook"}</Text>
-         </View>
+          <View style={styles.chatHeader}>
+            <Image
+              style={styles.avatarChatHeader}
+              source={{
+                uri: avatar,
+              }}
+            />
+            <Text style={styles.textHeader}>{username}</Text>
+            <Text style={styles.textContentRecied}>{"You're friends on Facebook"}</Text>
+          </View>
           {saveMess.map((ItemMess, index) => (
             <View style={styles.itemMess} key={index}>
               {ItemMess.senderId === senderId ? (
@@ -223,11 +272,11 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   avatarChatHeader: {
-   alignItems: "center",
-   width: 90,
-   height: 90,
-   borderRadius: 90,
-   marginHorizontal: 10,
+    alignItems: "center",
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    marginHorizontal: 10,
   },
   avatar: {
     width: 50,
@@ -246,14 +295,18 @@ const styles = StyleSheet.create({
   iconPhone: {
     marginRight: 20,
   },
+  delChat: {
+    marginLeft: 20,
+  },
   //body
   body: {
-//    minHeight: SCREEN_HEIGHT,
+    //    minHeight: SCREEN_HEIGHT,
     flexGrow: 1,
     justifyContent: "flex-end",
     paddingBottom: 70,
   },
   itemMess: {},
+
   contentSend: {
     maxWidth: "65%",
     padding: 5,
