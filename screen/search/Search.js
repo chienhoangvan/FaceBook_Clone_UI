@@ -113,7 +113,7 @@ export default function Search({ navigation }) {
               style={styles.ItemPeople}
               key={index}
               onPress={() =>
-                navigation.navigate("InforFriend", {
+                navigation.navigate("InforUser", {
                   avatar: ItemPeople.avatar,
                   idUser: ItemPeople._id,
                   username: ItemPeople.username,

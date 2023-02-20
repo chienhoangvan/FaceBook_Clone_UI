@@ -28,6 +28,7 @@ import ChangePass from "./screen/menu/ChangePass";
 import PolicyScreen from "./screen/menu/PolicyScreen";
 import PersonalInfor from "./screen/menu/PersonalInfor";
 import DetailPost from "./screen/posts/DetailPost";
+import InforUser from "./screen/friends/InforUser";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -61,6 +62,7 @@ export default function App() {
         <Stack.Screen name="PolicyScreen" component={PolicyScreen} />
         <Stack.Screen name="PersonalInfor" component={PersonalInfor} />
         <Stack.Screen name="DetailPost" component={DetailPost} />
+        <Stack.Screen name="InforUser" component={InforUser} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
