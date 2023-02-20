@@ -23,7 +23,7 @@ function MenuScreen({ navigation , route}) {
     const [isShowSetting, setIsShowSetting] = useState(false);
 
 
-      const showInfor = async () => {
+    const showInfor = async () => {
         const token = await AsyncStorage.getItem("id_token");
         return fetch("https://severfacebook.up.railway.app/api/v1/users/show", {
           method: "GET",
@@ -46,33 +46,32 @@ function MenuScreen({ navigation , route}) {
             if (response !== undefined) {
               setGetInfor(response.data);
             }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
+        })
+        .catch((error) => {
+        console.error(error);
+        });
+    };
 
-
-
-      const logout = async () => {
+    const logout = async () => {
         try {
-          // await AsyncStorage.removeItem("id_token");
-          setIsLoggedIn(false);
-          navigation.replace("Login");
+        // await AsyncStorage.removeItem("id_token");
+        setIsLoggedIn(false);
+        navigation.replace("Login");
         } catch (error) {
-          console.error(error);
+        console.error(error);
         }
-      };
+    };
 
-      useEffect(() => {
-        if (isLoggedIn === true) {
-          showInfor();
-        }
-      }, []);
+    useEffect(() => {
+    if (isLoggedIn === true) {
+        showInfor();
+    }
+    }, []);
 
     const handleExitApp = () => {
         BackHandler.exitApp();
     }
+
     return (
     <Layout route={route.name}>
         <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
@@ -168,79 +167,77 @@ function MenuScreen({ navigation , route}) {
                         </View>
                         <Feather name={isShowHelp ? 'chevron-up' : 'chevron-down'} size={20} style={{ top: 3 }} />
                     </TouchableOpacity>
-                    {
-                        isShowHelp && <>
-                            <TouchableOpacity
-                                    style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <Ionicons name='ios-help-buoy' size = {30} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Trung tâm trợ giúp</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                    style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <MaterialIcons name='report-problem' size = {30} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Báo cáo sự cố</Text>
-                                </View>
-                            </TouchableOpacity>
-                                <TouchableOpacity onPress={() => navigation.navigate('PolicyScreen')}
-                                    style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <Image style={{ width: 30, height: 30 }}
-                                        source={require('./source/icon_policy.png')} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Điều khoản & chính sách</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </>
-                    }
+                    {isShowHelp && <>
+                        
+                    <TouchableOpacity
+                            style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <Ionicons name='ios-help-buoy' size = {30} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Trung tâm trợ giúp</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                            style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <MaterialIcons name='report-problem' size = {30} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Báo cáo sự cố</Text>
+                        </View>
+                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('PolicyScreen')}
+                            style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <Image style={{ width: 30, height: 30 }}
+                                source={require('./source/icon_policy.png')} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Điều khoản & chính sách</Text>
+                        </View>
+                    </TouchableOpacity>
+                    </>}
+                    
                 </View>
                 <View style={{
                     paddingHorizontal: 10, flexDirection: 'column',
                     borderColor: '#d8d9de', borderTopWidth: 1, justifyContent: 'center',
                     minHeight: 45
                 }}>
-                    <TouchableOpacity onPress={() => {
-                        setIsShowSetting(!isShowSetting);
-                        setIsShowHelp(false);
-                    }}
-                        style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <MaterialIcons name='settings' size={25} />
-                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 10, top: 3 }}>
-                                Cài đặt & quyền riêng tư
-                            </Text>
+                <TouchableOpacity onPress={() => {
+                    setIsShowSetting(!isShowSetting);
+                    setIsShowHelp(false);
+                }}
+                    style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <MaterialIcons name='settings' size={25} />
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 10, top: 3 }}>
+                            Cài đặt & quyền riêng tư
+                        </Text>
+                    </View>
+                    <Feather name={isShowSetting ? 'chevron-up' : 'chevron-down'} size={20} style={{ top: 3 }} />
+                </TouchableOpacity>
+                    {isShowSetting && <>
+                        
+                    <TouchableOpacity onPress={() => navigation.navigate('AccountSetting')}
+                        style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <FontAwesome name='user-circle' size = {30} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Cài đặt</Text>
                         </View>
-                        <Feather name={isShowSetting ? 'chevron-up' : 'chevron-down'} size={20} style={{ top: 3 }} />
                     </TouchableOpacity>
-                    {
-                        isShowSetting && <>
-                            <TouchableOpacity onPress={() => navigation.navigate('AccountSetting')}
-                                style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <FontAwesome name='user-circle' size = {30} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Cài đặt</Text>
-                                </View>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <Feather name='lock' size = {30} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Lối tắt quyền riêng tư</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={{ ...styles.item, justifyContent: 'flex-start' }}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
-                                    <MaterialIcons name='language' size = {30} />
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Ngôn ngữ</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </>
-
-
-                    }
+                    <TouchableOpacity
+                        style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <Feather name='lock' size = {30} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Lối tắt quyền riêng tư</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{ ...styles.item, justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', height: 50 }}>
+                            <MaterialIcons name='language' size = {30} />
+                            <Text style={{ fontSize: 15, fontWeight: 'bold', marginLeft: 5 }}>Ngôn ngữ</Text>
+                        </View>
+                    </TouchableOpacity>
+                        
+                    </>}
                 </View>
                 <TouchableOpacity onPress={() => handleExitApp()}
                     style={{

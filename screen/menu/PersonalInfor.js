@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
-import { enableScreens } from "react-native-screens";
-import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign  from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -54,79 +50,72 @@ export default function AccountSetting({children,  navigation, route }) {
 
     return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-            <View style={styles.contentHeader}>
-              <AntDesign
-              name="arrowleft"
-              size={28}
-              color="black"
-              onPress={() => navigation.goBack()}
-              />
-            </View>
-        </View>
-        <View style={{  flexDirection: 'column', marginRight: 3 ,paddingVertical: 12,paddingLeft: 10,}}>
-             <View style={{ flexDirection: 'column', marginLeft: 10, paddingVertical: 12 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Thông tin cá nhân</Text>
-
-             </View>
-
-             <View style={{  flexDirection: 'column', marginRight: 3 ,paddingVertical: 12,}}>
-                  <View style={{ flexDirection: 'column', marginLeft: 10, paddingVertical: 12 }}>
-                       <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Chung</Text>
-
-                  </View>
-             <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
-                  <View style={{ flex : 1, flexDirection: 'column' , }}>
-                       <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Tên</Text>
-                       <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
-                           {getInfor?.username}
-                       </Text>
-                 </View>
-                 <View style = {{marginVertical : 12}}>
-
-                        <AntDesign  name='right' size = {40} />
-                 </View>
-             </TouchableOpacity>
-             <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
-                 <View style={{ flex : 1, flexDirection: 'column' , }}>
-                      <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Thông tin liên hệ</Text>
-                      <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
-                          Quản lí số điện thoại và email của bạn
-                      </Text>
-                 </View>
-                      <View style = {{marginVertical : 12}}>
-                            <AntDesign  name='right' size = {40} />
-                      </View>
-             </TouchableOpacity>
-             <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
-                  <View style={{ flex : 1, flexDirection: 'column' , }}>
-                       <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Xác nhận danh tính</Text>
-                       <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
-                           Xác nhận danh tính của bạn trên facebook
-                       </Text>
-                 </View>
-                 <View style = {{marginVertical : 12}}>
-
-                  <AntDesign  name='right' size = {40} />
-                  </View>
-             </TouchableOpacity>
-                 <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
-                       <View style={{ flex : 1, flexDirection: 'column' , }}>
-                            <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Quản lí tài khoản</Text>
-                            <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
-                                Cài đặt cách vô hiệu hoá và người liên hệ thừa kế
-                            </Text>
-                      </View>
-                      <View style = {{marginVertical : 12}}>
-
-                        <AntDesign  name='right' size = {40} />
-                       </View>
-                 </TouchableOpacity>
-               </View>
-
+      <View style={styles.header}>
+          <View style={styles.contentHeader}>
+            <AntDesign
+            name="arrowleft"
+            size={28}
+            color="black"
+            onPress={() => navigation.goBack()}
+            />
           </View>
+      </View>
+      <View style={{  flexDirection: 'column', marginRight: 3 ,paddingVertical: 12,paddingLeft: 10,}}>
+          <View style={{ flexDirection: 'column', marginLeft: 10, paddingVertical: 12 }}>
+              <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Thông tin cá nhân</Text>
 
+      </View>
 
+      <View style={{  flexDirection: 'column', marginRight: 3 ,paddingVertical: 12,}}>
+          <View style={{ flexDirection: 'column', marginLeft: 10, paddingVertical: 12 }}>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Chung</Text>
+          </View>
+          <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
+              <View style={{ flex : 1, flexDirection: 'column' , }}>
+                  <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Tên</Text>
+                  <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
+                      {getInfor?.username}
+                  </Text>
+              </View>
+              <View style = {{marginVertical : 12}}>
+                    <AntDesign  name='right' size = {40} />
+              </View>
+          </TouchableOpacity>
+             <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
+                <View style={{ flex : 1, flexDirection: 'column' , }}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Thông tin liên hệ</Text>
+                    <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
+                        Quản lí số điện thoại và email của bạn
+                    </Text>
+                </View>
+                <View style = {{marginVertical : 12}}>
+                      <AntDesign  name='right' size = {40} />
+                </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
+              <View style={{ flex : 1, flexDirection: 'column' , }}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Xác nhận danh tính</Text>
+                    <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
+                        Xác nhận danh tính của bạn trên facebook
+                    </Text>
+              </View>
+              <View style = {{marginVertical : 12}}>
+                    <AntDesign  name='right' size = {40} />
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, borderBottomWidth: 0.3,}}>
+              <View style={{ flex : 1, flexDirection: 'column' , }}>
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', marginVertical : 8 }}>Quản lí tài khoản</Text>
+                    <Text style={{ fontSize: 16, color: '#808080', top: -10 }}>
+                        Cài đặt cách vô hiệu hoá và người liên hệ thừa kế
+                    </Text>
+              </View>
+              <View style = {{marginVertical : 12}}>
+                    <AntDesign  name='right' size = {40} />
+              </View>
+          </TouchableOpacity>
+        </View>
+      </View>
       <View style={styles.contentBody}>{children}</View>
     </SafeAreaView>
   );
