@@ -14,12 +14,7 @@ import {
 } from "react-native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import HomeItem from "../../components/HomeItem";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -183,7 +178,9 @@ export default function InforFriend({ navigation, route }) {
           <View style={styles.inforContent}>
             <Text style={styles.textFullName}>{username}</Text>
             <View style={styles.button}>
-              <TouchableOpacity style={styles.buttonConfirm}>
+              <TouchableOpacity style={styles.buttonConfirm}
+              onPress = {() => console.log("thêm bạn bè")
+              }>
                 <Text style={styles.textButtonVideo}>{text}</Text>
               </TouchableOpacity>
               <TouchableOpacity
